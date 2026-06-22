@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- 背景グラデーション -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#311042" />
+    </linearGradient>
+    <!-- トロフィーのゴールドグラデーション -->
+    <linearGradient id="goldGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+    <!-- サッカーボールのシャドウ -->
+    <radialGradient id="ballShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- グロー背景円 -->
+  <circle cx="256" cy="230" r="130" fill="#f59e0b" opacity="0.15" filter="url(#glow)" />
+
+  <!-- サッカーボールのグラフィック -->
+  <g transform="translate(256, 190) scale(1.1)">
+    <!-- ベース球体 -->
+    <circle cx="0" cy="0" r="80" fill="#f8fafc" />
+    <circle cx="0" cy="0" r="80" fill="url(#ballShadow)" />
+
+    <!-- 五角形（黒・ダークネイビー部分） -->
+    <!-- センター -->
+    <polygon points="0,-24 22.8,-7.4 14.1,19.4 -14.1,19.4 -22.8,-7.4" fill="#0f172a" />
+    
+    <!-- 周囲のポリゴン（一部切り抜き） -->
+    <!-- 上 -->
+    <path d="M 0,-80 L -12,-56 L 12,-56 Z" fill="#0f172a" />
+    <line x1="0" y1="-80" x2="0" y2="-56" stroke="#e2e8f0" stroke-width="2" />
+    <!-- 右上 -->
+    <path d="M 76.1,-24.7 L 53,-24 L 60.1,-46.2 Z" fill="#0f172a" />
+    <!-- 右下 -->
+    <path d="M 47,64.7 L 41.2,42 L 62.4,50 Z" fill="#0f172a" />
+    <!-- 左下 -->
+    <path d="M -47,64.7 L -41.2,42 L -62.4,50 Z" fill="#0f172a" />
+    <!-- 左上 -->
+    <path d="M -76.1,-24.7 L -53,-24 L -60.1,-46.2 Z" fill="#0f172a" />
+
+    <!-- ボールのグリッド線 -->
+    <!-- センターから外側へのライン -->
+    <line x1="0" y1="-24" x2="0" y2="-56" stroke="#0f172a" stroke-width="4" />
+    <line x1="22.8" y1="-7.4" x2="53" y2="-24" stroke="#0f172a" stroke-width="4" />
+    <line x1="14.1" y1="19.4" x2="41.2" y2="42" stroke="#0f172a" stroke-width="4" />
+    <line x1="-14.1" y1="19.4" x2="-41.2" y2="42" stroke="#0f172a" stroke-width="4" />
+    <line x1="-22.8" y1="-7.4" x2="-53" y2="-24" stroke="#0f172a" stroke-width="4" />
+
+    <!-- 外周の境界線 -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#0f172a" stroke-width="6" />
+  </g>
+
+  <!-- トロフィー/装飾ゴールドライン -->
+  <path d="M 180,310 L 220,380 L 292,380 L 332,310 Z" fill="url(#goldGrad)" opacity="0.9" />
+  <!-- トロフィー台座 -->
+  <rect x="200" y="380" width="112" height="24" rx="6" fill="#e2e8f0" />
+  <rect x="180" y="404" width="152" height="16" rx="4" fill="#64748b" />
+
+  <!-- テキスト表示 -->
+  <text x="256" y="465" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="34" font-weight="900" fill="#f8fafc" text-anchor="middle" letter-spacing="4">
+    USA·MEX·CAN
+  </text>
+  <text x="256" y="358" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="32" font-weight="900" fill="#0f172a" text-anchor="middle" letter-spacing="2">
+    2026
+  </text>
+</svg>

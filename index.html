@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>World Cup 2026 Hub</title>
+  
+  <!-- Viewport settings for iOS WebApp (standalone) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- PWA & Apple Specific Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WC2026">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  
+  <!-- Google Fonts (Outfit & Noto Sans JP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Status Bar Overlays for iOS Translucent Style -->
+  <div class="status-bar-overlay"></div>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-logo">
+      <span class="logo-accent">FIFA</span>
+      <span class="logo-title">WC 2026</span>
+    </div>
+    <div class="header-status">
+      <span class="live-indicator"><span class="pulse-dot"></span>LIVE</span>
+      <span class="current-date" id="headerDate">2026.06.22</span>
+    </div>
+  </header>
+
+  <!-- App Body Containers for Tabs -->
+  <main class="app-content">
+    
+    <!-- Pull to Refresh Indicator -->
+    <div class="ptr-container" id="ptrContainer">
+      <div class="ptr-icon-wrap">
+        <svg class="ptr-icon" id="ptrIcon" viewBox="0 0 24 24">
+          <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="ptr-text" id="ptrText">引っ張って更新</span>
+    </div>
+    
+    <!-- ==================== HOME TAB ==================== -->
+    <section id="tab-home" class="tab-view active">
+      <div class="hero-card">
+        <div class="hero-bg-accent"></div>
+        <div class="hero-content">
+          <span class="badge">GROUP STAGE UNDERWAY</span>
+          <h1>熱狂の北米大会が開催中！</h1>
+          <p>グループステージ第3節へ突入。決勝トーナメント進出をかけた激闘を見逃すな！</p>
+          <div class="countdown-container">
+            <div class="countdown-label">日本代表 次戦（スウェーデン戦）まで</div>
+            <div class="countdown-timer" id="countdownTimer">03日 12時間 45分</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>最新の動き (SAMURAI BLUE)</h2>
+      </div>
+      <div class="news-list" id="homeNewsList">
+        <!-- JSで動的に追加されます -->
+      </div>
+
+      <div class="section-title">
+        <h2>グループF 順位状況 (Live)</h2>
+      </div>
+      <div class="group-mini-table">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>国名</th>
+              <th>勝点</th>
+              <th>試合</th>
+              <th>勝</th>
+              <th>分</th>
+              <th>敗</th>
+              <th>得失</th>
+            </tr>
+          </thead>
+          <tbody id="homeGroupTable">
+            <!-- JSで動的に追加されます -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== JAPAN TAB ==================== -->
+    <section id="tab-japan" class="tab-view">
+      <div class="view-header">
+        <h1>SAMURAI BLUE</h1>
+        <p>グループF：オランダ、日本、スウェーデン、チュニジア</p>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" data-subtab="japan-results">対戦成績・日程</button>
+        <button class="sub-tab-btn" data-subtab="japan-pitch">スタメン編成 (Starting XI)</button>
+      </div>
+
+      <!-- サブタブ：試合結果 -->
+      <div id="subtab-japan-results" class="subtab-view active">
+        <div class="match-card-list">
+          <!-- 試合1 -->
+          <div class="match-card completed">
+            <div class="match-meta">第1節 - 6月14日 (日) | 試合終了</div>
+            <div class="match-teams">
+              <div class="team-row">
+                <span class="flag">🇳🇱</span>
+                <span class="team-name">オランダ</span>
+                <span class="score">2</span>
+              </div>
+              <div class="team-row">
+                <span class="flag">🇯🇵</span>
+                <span class="team-name">日本</span>
+                <span class="score">2</span>
+              </div>
+            </div>
+            <div class="match-detail-summary">
+              <p>【得点者】日：堂安 (35分), 鎌田 (78分) / オ：ガクポ (12分), デパイ (88分 PK)</p>
+              <p class="summary-text">強豪オランダ相手に先制されるも逆転。終了間際のPKで引き分けに終わるが、貴重な勝点1を獲得！</p>
+            </div>
+          </div>
+          <!-- 試合2 -->
+          <div class="match-card completed highlight">
+            <div class="match-meta">第2節 - 6月20日 (土) | 試合終了</div>
+            <div class="match-teams">
+              <div class="team-row">
+                <span class="flag">🇯🇵</span>
+                <span class="team-name font-bold">日本</span>
+                <span class="score font-bold">4</span>
+              </div>
+              <div class="team-row">
+                <span class="flag">🇹🇳</span>
+                <span class="team-name">チュニジア</span>
+                <span class="score">0</span>
+              </div>
+            </div>
+            <div class="match-detail-summary">
+              <p>【得点者】日：上田 (8分, 42分), 久保 (61分), 中村 (85分)</p>
+              <p class="summary-text">上田の2得点を含む怒涛のゴールラッシュ。終始試合を支配し、無失点でワールドカップ初勝利！</p>
+            </div>
+          </div>
+          <!-- 試合3 -->
+          <div class="match-card upcoming">
+            <div class="match-meta">第3節 - 6月25日 (木) | 16:00 (日本時間 6月26日 05:00)</div>
+            <div class="match-teams">
+              <div class="team-row">
+                <span class="flag">🇯🇵</span>
+                <span class="team-name">日本</span>
+                <span class="score">-</span>
+              </div>
+              <div class="team-row">
+                <span class="flag">🇸🇪</span>
+                <span class="team-name">スウェーデン</span>
+                <span class="score">-</span>
+              </div>
+            </div>
+            <div class="match-action-area">
+              <button class="btn btn-primary btn-sm predict-btn-shortcut">試合結果を予想する</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- サブタブ：スタメン編成 -->
+      <div id="subtab-japan-pitch" class="subtab-view">
+        <div class="pitch-instructions">
+          <p>ポジションを選択し、リストから選手を配置してスタメンを作成しましょう。戦術ボードとして使用できます。</p>
+        </div>
+
+        <div class="pitch-container">
+          <div class="soccer-pitch" id="soccerPitch">
+            <!-- ポジションノード (4-2-3-1 フォーメーション例) -->
+            <!-- FW -->
+            <div class="pitch-node" data-position="CF" style="top: 15%; left: 50%;">
+              <div class="node-player">+</div>
+              <span class="node-label">CF</span>
+            </div>
+            <!-- MF -->
+            <div class="pitch-node" data-position="LWG" style="top: 35%; left: 20%;">
+              <div class="node-player">+</div>
+              <span class="node-label">LWG</span>
+            </div>
+            <div class="pitch-node" data-position="OH" style="top: 35%; left: 50%;">
+              <div class="node-player">+</div>
+              <span class="node-label">OH</span>
+            </div>
+            <div class="pitch-node" data-position="RWG" style="top: 35%; left: 80%;">
+              <div class="node-player">+</div>
+              <span class="node-label">RWG</span>
+            </div>
+            <div class="pitch-node" data-position="LDMF" style="top: 58%; left: 33%;">
+              <div class="node-player">+</div>
+              <span class="node-label">DMF</span>
+            </div>
+            <div class="pitch-node" data-position="RDMF" style="top: 58%; left: 67%;">
+              <div class="node-player">+</div>
+              <span class="node-label">DMF</span>
+            </div>
+            <!-- DF -->
+            <div class="pitch-node" data-position="LSB" style="top: 75%; left: 15%;">
+              <div class="node-player">+</div>
+              <span class="node-label">SB</span>
+            </div>
+            <div class="pitch-node" data-position="LCB" style="top: 77%; left: 38%;">
+              <div class="node-player">+</div>
+              <span class="node-label">CB</span>
+            </div>
+            <div class="pitch-node" data-position="RCB" style="top: 77%; left: 62%;">
+              <div class="node-player">+</div>
+              <span class="node-label">CB</span>
+            </div>
+            <div class="pitch-node" data-position="RSB" style="top: 75%; left: 85%;">
+              <div class="node-player">+</div>
+              <span class="node-label">SB</span>
+            </div>
+            <!-- GK -->
+            <div class="pitch-node" data-position="GK" style="top: 90%; left: 50%;">
+              <div class="node-player">+</div>
+              <span class="node-label">GK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pitch-actions">
+          <button class="btn btn-secondary" id="clearPitchBtn">スタメンをクリア</button>
+          <button class="btn btn-primary" id="savePitchBtn">スタメンを保存</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PLAYERS TAB ==================== -->
+    <section id="tab-players" class="tab-view">
+      <div class="view-header">
+        <h1>日本代表招集メンバー</h1>
+        <p>W杯2026登録メンバー26名の一覧とステータス</p>
+      </div>
+
+      <!-- フィルターバー -->
+      <div class="filter-bar">
+        <button class="filter-chip active" data-pos="ALL">すべて</button>
+        <button class="filter-chip" data-pos="GK">GK</button>
+        <button class="filter-chip" data-pos="DF">DF</button>
+        <button class="filter-chip" data-pos="MF">MF</button>
+        <button class="filter-chip" data-pos="FW">FW</button>
+      </div>
+
+      <!-- メンバーカードグリッド -->
+      <div class="players-grid" id="playersGrid">
+        <!-- JSで動的に追加されます -->
+      </div>
+    </section>
+
+    <!-- ==================== PREDICTOR TAB ==================== -->
+    <section id="tab-predictor" class="tab-view">
+      <div class="view-header">
+        <h1>海外オッズ予想 &amp; シミュレーター</h1>
+        <p>海外ブックメーカーオッズのリアルタイム予測と決勝トーナメント勝敗予想</p>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" data-subtab="predictor-game">海外オッズ・AI予想</button>
+        <button class="sub-tab-btn" data-subtab="predictor-bracket">決勝トーナメント予想</button>
+      </div>
+
+      <!-- サブタブ：海外オッズ予想 -->
+      <div id="subtab-predictor-game" class="subtab-view active">
+        
+        <div class="odds-predictor-card">
+          <h3>対戦カード＆オッズ分析</h3>
+          <p class="card-desc">対戦チームを選択すると、海外の主要ブックメーカーの最新オッズとAI勝敗確率をリアルタイム計算します。</p>
+          
+          <div class="match-select-container">
+            <label for="oddsMatchSelector" class="select-label">対象の対戦カードを選択:</label>
+            <select id="oddsMatchSelector" class="ios-select full-width">
+              <!-- JSで動的に追加されます -->
+            </select>
+          </div>
+
+          <div class="team-select-grid" style="margin-top: 18px;">
+            <div class="team-select-box">
+              <span class="select-flag" id="flagSelectA">🇯🇵</span>
+              <div class="team-select-name" id="nameTeamA">日本</div>
+              <div class="team-rating-badge" id="ratingA">Rating: 84</div>
+            </div>
+            
+            <div class="vs-divider">VS</div>
+            
+            <div class="team-select-box">
+              <span class="select-flag" id="flagSelectB">🇸🇪</span>
+              <div class="team-select-name" id="nameTeamB">スウェーデン</div>
+              <div class="team-rating-badge" id="ratingB">Rating: 85</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- オッズ表示セクション -->
+        <div class="odds-display-card">
+          <h4>🏆 海外ブックメーカー オッズ比較</h4>
+          <div class="odds-table-container">
+            <table class="odds-table">
+              <thead>
+                <tr>
+                  <th>ブックメーカー</th>
+                  <th id="labelWinA">チームA 勝</th>
+                  <th>引き分け</th>
+                  <th id="labelWinB">チームB 勝</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="bookmaker-bet365">
+                  <td class="bookie-name"><span class="bookie-logo green">bet365</span></td>
+                  <td class="odds-val" id="oddsA-bet365">-</td>
+                  <td class="odds-val" id="oddsD-bet365">-</td>
+                  <td class="odds-val" id="oddsB-bet365">-</td>
+                </tr>
+                <tr id="bookmaker-williamhill">
+                  <td class="bookie-name"><span class="bookie-logo blue">William Hill</span></td>
+                  <td class="odds-val" id="oddsA-williamhill">-</td>
+                  <td class="odds-val" id="oddsD-williamhill">-</td>
+                  <td class="odds-val" id="oddsB-williamhill">-</td>
+                </tr>
+                <tr id="bookmaker-unibet">
+                  <td class="bookie-name"><span class="bookie-logo red">1xBet</span></td>
+                  <td class="odds-val" id="oddsA-unibet">-</td>
+                  <td class="odds-val" id="oddsD-unibet">-</td>
+                  <td class="odds-val" id="oddsB-unibet">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 確率 & AI予想セクション -->
+        <div class="analysis-card">
+          <h4>📊 AI 勝敗予測確率</h4>
+          
+          <div class="probability-bar-wrapper">
+            <div class="prob-labels">
+              <span id="probLabelA">チームA: 33%</span>
+              <span id="probLabelD">引き分け: 33%</span>
+              <span id="probLabelB">チームB: 33%</span>
+            </div>
+            <div class="prob-bar-container">
+              <div class="prob-bar win-a" id="probBarA" style="width: 33.3%;"></div>
+              <div class="prob-bar draw" id="probBarD" style="width: 33.3%;"></div>
+              <div class="prob-bar win-b" id="probBarB" style="width: 33.3%;"></div>
+            </div>
+          </div>
+
+          <div class="score-predictions-section">
+            <h5>🎯 最も確率の高いスコア予想 (海外AI)</h5>
+            <ol class="score-pred-list" id="scorePredList">
+              <!-- JSで動的に追加されます -->
+            </ol>
+          </div>
+
+          <div class="tactical-commentary-section">
+            <h5>📝 ブックメーカー・AI分析レポート</h5>
+            <p class="analysis-text" id="aiAnalysisText">
+              ロード中...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- サブタブ：決勝トーナメント予想 -->
+      <div id="subtab-predictor-bracket" class="subtab-view">
+        <div class="bracket-intro">
+          <p>決勝トーナメント（ラウンド16以降を想定した主要カード）の勝ち抜けチームをタップして、あなたの優勝予想を作成しましょう！</p>
+        </div>
+
+        <div class="bracket-wrapper">
+          <div class="bracket-container">
+            <!-- 準々決勝 -->
+            <div class="bracket-round">
+              <div class="round-title">準々決勝</div>
+              
+              <div class="bracket-match" data-match-id="q1">
+                <div class="bracket-team" data-team-id="ARG" onclick="predictBracketWinner('q1', 'ARG')">
+                  <span class="flag">🇦🇷</span> <span class="name">アルゼンチン</span>
+                </div>
+                <div class="bracket-team" data-team-id="ENG" onclick="predictBracketWinner('q1', 'ENG')">
+                  <span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span class="name">イングランド</span>
+                </div>
+              </div>
+
+              <div class="bracket-match" data-match-id="q2">
+                <div class="bracket-team" data-team-id="ESP" onclick="predictBracketWinner('q2', 'ESP')">
+                  <span class="flag">🇪🇸</span> <span class="name">スペイン</span>
+                </div>
+                <div class="bracket-team" data-team-id="GER" onclick="predictBracketWinner('q2', 'GER')">
+                  <span class="flag">🇩🇪</span> <span class="name">ドイツ</span>
+                </div>
+              </div>
+
+              <div class="bracket-match" data-match-id="q3">
+                <div class="bracket-team" data-team-id="FRA" onclick="predictBracketWinner('q3', 'FRA')">
+                  <span class="flag">🇫🇷</span> <span class="name">フランス</span>
+                </div>
+                <div class="bracket-team" data-team-id="POR" onclick="predictBracketWinner('q3', 'POR')">
+                  <span class="flag">🇵🇹</span> <span class="name">ポルトガル</span>
+                </div>
+              </div>
+
+              <div class="bracket-match" data-match-id="q4">
+                <div class="bracket-team" data-team-id="BRA" onclick="predictBracketWinner('q4', 'BRA')">
+                  <span class="flag">🇧🇷</span> <span class="name">ブラジル</span>
+                </div>
+                <div class="bracket-team" data-team-id="JPN" onclick="predictBracketWinner('q4', 'JPN')">
+                  <span class="flag">🇯🇵</span> <span class="name">日本</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 準決勝 -->
+            <div class="bracket-round">
+              <div class="round-title">準決勝</div>
+
+              <div class="bracket-match" data-match-id="sf1">
+                <div class="bracket-team placeholder" data-slot="q1-winner">
+                  <span class="name">Q1勝者</span>
+                </div>
+                <div class="bracket-team placeholder" data-slot="q2-winner">
+                  <span class="name">Q2勝者</span>
+                </div>
+              </div>
+
+              <div class="bracket-match" data-match-id="sf2">
+                <div class="bracket-team placeholder" data-slot="q3-winner">
+                  <span class="name">Q3勝者</span>
+                </div>
+                <div class="bracket-team placeholder" data-slot="q4-winner">
+                  <span class="name">Q4勝者</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 決勝 -->
+            <div class="bracket-round">
+              <div class="round-title">決勝</div>
+              <div class="bracket-match final" data-match-id="f">
+                <div class="bracket-team placeholder" data-slot="sf1-winner">
+                  <span class="name">SF1勝者</span>
+                </div>
+                <div class="bracket-team placeholder" data-slot="sf2-winner">
+                  <span class="name">SF2勝者</span>
+                </div>
+              </div>
+              
+              <!-- 優勝国 -->
+              <div class="champion-display hidden" id="championDisplay">
+                <div class="trophy-icon">🏆</div>
+                <div class="champ-title">あなたの優勝予想</div>
+                <div class="champ-team" id="champTeamText">-</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="bracket-actions">
+          <button class="btn btn-secondary" id="resetBracketBtn">リセット</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== POWERS TAB ==================== -->
+    <section id="tab-powers" class="tab-view">
+      <div class="view-header">
+        <h1>世界の強豪国情報</h1>
+        <p>2026年大会の優勝候補チームのステータスと主力選手</p>
+      </div>
+
+      <div class="powers-list" id="powersList">
+        <!-- JSで動的に追加されます -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Player Selection Modal (for Pitch Starting XI Builder) -->
+  <div class="modal-overlay" id="playerModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">選手を選択</h3>
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul class="modal-player-list" id="modalPlayerList">
+          <!-- JSで動的に選手リストが生成されます -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS PWA Install Instruction Banner -->
+  <div class="ios-install-banner hidden" id="iosInstallBanner">
+    <div class="banner-body">
+      <div class="banner-icon">
+        <img src="assets/icon.svg" alt="App Icon">
+      </div>
+      <div class="banner-text">
+        <h4>ホーム画面に追加して起動！</h4>
+        <p>Safariのメニューから「ホーム画面に追加」すると、全画面でネイティブアプリのように使えます。</p>
+      </div>
+      <button class="banner-close" id="closeInstallBannerBtn">&times;</button>
+    </div>
+    <div class="banner-instruction">
+      下部の共有ボタン <span class="share-icon-dummy">⎋</span> をタップし、「ホーム画面に追加」を選択してください。
+    </div>
+  </div>
+
+  <!-- iOS-like Bottom Navigation Bar -->
+  <nav class="app-navbar">
+    <button class="nav-item active" data-tab="home">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+      <span class="nav-label">ホーム</span>
+    </button>
+    <button class="nav-item" data-tab="japan">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+      <span class="nav-label">代表</span>
+    </button>
+    <button class="nav-item" data-tab="players">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+      </svg>
+      <span class="nav-label">メンバー</span>
+    </button>
+    <button class="nav-item" data-tab="predictor">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+      </svg>
+      <span class="nav-label">予想</span>
+    </button>
+    <button class="nav-item" data-tab="powers">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+      </svg>
+      <span class="nav-label">強豪国</span>
+    </button>
+  </nav>
+
+  <!-- PWA Registration scripts -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('Service Worker registered successfully!', reg.scope))
+          .catch((err) => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+  
+  <!-- Custom Logic JS -->
+  <script src="app.js"></script>
+</body>
+</html>

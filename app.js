@@ -776,18 +776,6 @@ function calculateOddsAndPredictions() {
       const pct = (item.prob * 100).toFixed(1);
       return `
         <li class="score-pred-item">
-          <span class="rank">#1</span>
-          <span class="score-text">${teamA.name} ${item.scoreA} - ${item.scoreB} ${teamB.name}</span>
-          <span class="percentage">${pct}%</span>
-        </li>
-      `;
-    }).replace(/#1/g, (m, i) => `#${scorePredList.childNodes.length + 1}`); // Fix indices dynamically
-    
-    // Better index rendering
-    scorePredList.innerHTML = scoresList.slice(0, 3).map((item, idx) => {
-      const pct = (item.prob * 100).toFixed(1);
-      return `
-        <li class="score-pred-item">
           <span class="rank">#${idx + 1}</span>
           <span class="score-text">${teamA.name} ${item.scoreA} - ${item.scoreB} ${teamB.name}</span>
           <span class="percentage">${pct}%</span>

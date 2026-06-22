@@ -558,13 +558,53 @@
     </button>
   </nav>
 
+  <!-- Player Detail Modal (for Members Tab) -->
+  <div class="modal-overlay" id="playerDetailModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>選手プロフィール</h3>
+        <button class="close-btn" id="closeDetailModalBtn">&times;</button>
+      </div>
+      <div class="modal-body" id="playerDetailModalBody">
+        <!-- JSで動的に追加されます -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-icon">🔄</span>
+    <span class="toast-message" id="toastMessage">情報を更新しました</span>
+  </div>
+
   <!-- PWA Registration scripts -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then((reg) => console.log('Service Worker registered successfully!', reg.scope))
+          .then((reg) => {
+            console.log('Service Worker registered successfully!', reg.scope);
+            
+            // Check for updates
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('New Service Worker version ready.');
+                }
+              });
+            });
+          })
           .catch((err) => console.error('Service Worker registration failed:', err));
+      });
+
+      // Reload page when new service worker takes over to apply changes instantly
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
       });
     }
   </script>

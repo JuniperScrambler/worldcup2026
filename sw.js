@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wc2026-hub-v1';
+const CACHE_NAME = 'wc2026-hub-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -33,7 +33,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// フェッチ要求に対するキャッシュファーストまたはネットワークフォールバック
+// フェッチ要求に対する Stale-While-Revalidate 戦略
 self.addEventListener('fetch', (event) => {
   // HTTP/HTTPSリクエストのみ処理（chrome-extension等を除外）
   if (!event.request.url.startsWith(self.location.origin)) {
@@ -42,22 +42,20 @@ self.addEventListener('fetch', (event) => {
   
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((response) => {
-        // レスポンスが正常かつキャッシュ対象である場合のみ保存
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
+      const fetchPromise = fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
         }
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-        return response;
+        return networkResponse;
       }).catch(() => {
-        // オフライン時のフォールバック処理（必要なら）
+        // オフラインまたはネットワークエラー時は静かに無視してキャッシュにフォールバック
       });
+      
+      // キャッシュがあれば即座に返し、バックグラウンドで最新を取得。なければフェッチプロミスを返す
+      return cachedResponse || fetchPromise;
     })
   );
 });

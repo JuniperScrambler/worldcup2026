@@ -485,7 +485,7 @@ function renderPlayersTab() {
       : JAPAN_SQUAD.filter(p => p.pos === posFilter);
       
     playersGrid.innerHTML = filtered.map(player => `
-      <div class="player-card">
+      <div class="player-card" onclick="showPlayerDetail(${player.number})">
         <div class="player-card-num">${player.number}</div>
         <div class="player-card-header">
           <div class="player-avatar-wrap">
@@ -524,21 +524,172 @@ function renderPlayersTab() {
 }
 
 // --------------------------------------------------------------------------
-// 7. Match Simulator & Predictor Tab
+// 6.5. Player Detail Bottom Sheet Modal
 // --------------------------------------------------------------------------
 
-function renderPredictorTab() {
-  const simBtn = document.getElementById('runSimulationBtn');
+window.showPlayerDetail = function(playerNumber) {
+  const player = JAPAN_SQUAD.find(p => p.number === playerNumber);
+  if (!player) return;
+
+  const modal = document.getElementById('playerDetailModal');
+  const body = document.getElementById('playerDetailModalBody');
+  const closeBtn = document.getElementById('closeDetailModalBtn');
   
-  if (simBtn) {
-    simBtn.addEventListener('click', () => {
-      runMatchSimulation();
-    });
+  if (!modal || !body) return;
+
+  // Position full names
+  const positionNames = {
+    'GK': 'ゴールキーパー (GK)',
+    'DF': 'ディフェンダー (DF)',
+    'MF': 'ミッドフィルダー (MF)',
+    'FW': 'フォワード (FW)'
+  };
+  
+  const playStyles = {
+    'GK': '高いセービング技術と抜群の反射神経を持ち、正確なフィードで最後方から攻撃の起点となる現代的な守護神。',
+    'DF': '強固なフィジカルによる高い守備力とインテンシティを誇り、ビルドアップ力も兼ね備えた最終ラインの盾。',
+    'MF': '卓越した戦術眼、広い視野、精密なパス精度を誇り、攻守のリンクマンとしてゲームを支配する司令塔。',
+    'FW': '圧倒的なアジリティとスピードで裏スペースへ抜け出し、ゴール前での鋭い嗅覚で得点を量産するストライカー。'
+  };
+
+  // Generate deterministic mock stats based on jersey number & rating
+  const offset = (n) => ((player.number * n) % 11) - 5; // -5 to 5
+  const r = player.rating;
+
+  const stats = {};
+  if (player.pos === 'GK') {
+    stats.defense = Math.min(99, r + 4 + offset(1));
+    stats.attack = Math.min(99, Math.max(10, r - 50 + offset(2)));
+    stats.speed = Math.min(99, r - 12 + offset(3));
+    stats.stamina = Math.min(99, r - 8 + offset(4));
+    stats.technique = Math.min(99, r - 15 + offset(5));
+  } else if (player.pos === 'DF') {
+    stats.defense = Math.min(99, r + 3 + offset(1));
+    stats.attack = Math.min(99, r - 22 + offset(2));
+    stats.speed = Math.min(99, r - 4 + offset(3));
+    stats.stamina = Math.min(99, r + 2 + offset(4));
+    stats.technique = Math.min(99, r - 8 + offset(5));
+  } else if (player.pos === 'MF') {
+    stats.defense = Math.min(99, r - 8 + offset(1));
+    stats.attack = Math.min(99, r - 3 + offset(2));
+    stats.speed = Math.min(99, r - 2 + offset(3));
+    stats.stamina = Math.min(99, r - 1 + offset(4));
+    stats.technique = Math.min(99, r + 3 + offset(5));
+  } else { // FW
+    stats.defense = Math.min(99, Math.max(15, r - 35 + offset(1)));
+    stats.attack = Math.min(99, r + 4 + offset(2));
+    stats.speed = Math.min(99, r + 5 + offset(3));
+    stats.stamina = Math.min(99, r - 4 + offset(4));
+    stats.technique = Math.min(99, r + 2 + offset(5));
   }
 
-  // Restore bracket predictions UI
-  restoreBracketUI();
-}
+  // Calculate mock market value
+  const marketValueYen = Math.round(player.rating * player.rating * (35 - player.age) * 45000);
+  const marketValueEuro = (marketValueYen / 160).toFixed(1);
+  let valStr = "";
+  if (marketValueYen >= 100000000) {
+    valStr = `約 ${(marketValueYen / 100000000).toFixed(1)} 億円 (${(marketValueEuro / 100).toFixed(1)}M €)`;
+  } else {
+    valStr = `約 ${(marketValueYen / 10000).toLocaleString('ja-JP')} 万円`;
+  }
+
+  body.innerHTML = `
+    <div class="player-detail-profile">
+      <div class="player-detail-avatar-wrap">
+        <img src="assets/players/${player.number}.jpg" 
+             onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(player.name)}'" 
+             alt="${player.kanji}" 
+             class="player-detail-avatar">
+      </div>
+      <div class="player-detail-meta">
+        <div class="player-detail-name">${player.kanji}</div>
+        <div class="player-detail-subname">${player.name}</div>
+        <div class="player-detail-badge-row">
+          <span class="player-detail-badge number">#${player.number}</span>
+          <span class="player-detail-badge position">${positionNames[player.pos] || player.pos}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-detail-info-grid">
+      <div class="player-detail-info-box">
+        <div class="player-detail-info-label">年齢</div>
+        <div class="player-detail-info-val">${player.age}歳</div>
+      </div>
+      <div class="player-detail-info-box">
+        <div class="player-detail-info-val" style="font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${player.club}</div>
+        <div class="player-detail-info-label" style="margin-top: 4px;">所属クラブ</div>
+      </div>
+      <div class="player-detail-info-box">
+        <div class="player-detail-info-label">総合評価</div>
+        <div class="player-detail-info-val" style="color: var(--color-accent);">${player.rating}</div>
+      </div>
+    </div>
+
+    <div class="player-detail-stats">
+      <h4>📈 実力パラメータ（詳細AI分析）</h4>
+      
+      <div class="player-detail-stat-row">
+        <span class="player-detail-stat-name">攻撃力</span>
+        <div class="player-detail-stat-bar-outer">
+          <div class="player-detail-stat-bar-inner" style="width: ${stats.attack}%;"></div>
+        </div>
+        <span class="player-detail-stat-val">${stats.attack}</span>
+      </div>
+
+      <div class="player-detail-stat-row">
+        <span class="player-detail-stat-name">守備力</span>
+        <div class="player-detail-stat-bar-outer">
+          <div class="player-detail-stat-bar-inner" style="width: ${stats.defense}%;"></div>
+        </div>
+        <span class="player-detail-stat-val">${stats.defense}</span>
+      </div>
+
+      <div class="player-detail-stat-row">
+        <span class="player-detail-stat-name">スピード</span>
+        <div class="player-detail-stat-bar-outer">
+          <div class="player-detail-stat-bar-inner" style="width: ${stats.speed}%;"></div>
+        </div>
+        <span class="player-detail-stat-val">${stats.speed}</span>
+      </div>
+
+      <div class="player-detail-stat-row">
+        <span class="player-detail-stat-name">スタミナ</span>
+        <div class="player-detail-stat-bar-outer">
+          <div class="player-detail-stat-bar-inner" style="width: ${stats.stamina}%;"></div>
+        </div>
+        <span class="player-detail-stat-val">${stats.stamina}</span>
+      </div>
+
+      <div class="player-detail-stat-row">
+        <span class="player-detail-stat-name">テクニック</span>
+        <div class="player-detail-stat-bar-outer">
+          <div class="player-detail-stat-bar-inner" style="width: ${stats.technique}%;"></div>
+        </div>
+        <span class="player-detail-stat-val">${stats.technique}</span>
+      </div>
+    </div>
+
+    <div class="player-detail-desc">
+      <strong>想定市場価値:</strong> ${valStr}<br>
+      <strong style="margin-top: 4px; display: inline-block;">プレースタイル:</strong> ${playStyles[player.pos] || ''}
+    </div>
+  `;
+
+  modal.classList.add('active');
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+  };
+  
+  if (closeBtn) {
+    closeBtn.onclick = closeModal;
+  }
+  
+  modal.onclick = (e) => {
+    if (e.target === modal) closeModal();
+  };
+};
 
 // --------------------------------------------------------------------------
 // 7. Overseas Odds Predictor & Bracket
@@ -1115,10 +1266,46 @@ function setupPullToRefresh() {
       ptrText.style.color = "var(--color-success)";
       ptr.style.height = '60px';
       
-      // ページをリロードして最新状態に更新
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
+      // 動的データの更新
+      Promise.all([
+        fetchRealNews().then(realNews => {
+          const newsListContainer = document.getElementById('homeNewsList');
+          if (newsListContainer && realNews && realNews.length > 0) {
+            newsListContainer.innerHTML = realNews.map(news => {
+              const isLink = !!news.link;
+              const tagType = isLink ? 'a' : 'div';
+              const linkAttr = isLink ? `href="${news.link}" target="_blank" rel="noopener noreferrer"` : '';
+              return `
+                <${tagType} class="news-card" ${linkAttr}>
+                  <span class="news-tag-dot ${news.tag}"></span>
+                  <div class="news-content">
+                    <div class="news-meta">
+                      <span>${isLink ? 'REALTIME NEWS' : 'SAMURAI BLUE'}</span>
+                      <span>${news.date}</span>
+                    </div>
+                    <div class="news-title">${news.title}</div>
+                  </div>
+                </${tagType}>
+              `;
+            }).join('');
+          }
+        }),
+        // SWのチェックを強制
+        ('serviceWorker' in navigator) ? navigator.serviceWorker.ready.then(reg => reg.update()) : Promise.resolve()
+      ]).then(() => {
+        showToast("最新情報に更新しました");
+      }).catch((err) => {
+        console.warn("Pull-to-refresh check failed:", err);
+        showToast("更新に失敗しました");
+      }).finally(() => {
+        setTimeout(() => {
+          ptr.style.height = '0';
+          ptr.style.marginBottom = '0';
+          ptr.classList.remove('active');
+          ptr.classList.remove('refreshing');
+          ptrIconWrap.style.transform = 'rotate(0deg)';
+        }, 600);
+      });
     } else {
       // キャンセル
       ptr.style.height = '0';
@@ -1130,4 +1317,31 @@ function setupPullToRefresh() {
     startY = 0;
     currentY = 0;
   });
+}
+
+// --------------------------------------------------------------------------
+// 11. Toast Notification Utility
+// --------------------------------------------------------------------------
+
+function showToast(message) {
+  const toast = document.getElementById('toastNotification');
+  const msgEl = document.getElementById('toastMessage');
+  const iconEl = toast ? toast.querySelector('.toast-icon') : null;
+  
+  if (!toast || !msgEl) return;
+
+  msgEl.textContent = message;
+  
+  if (iconEl) {
+    iconEl.classList.add('spin');
+  }
+
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+    if (iconEl) {
+      iconEl.classList.remove('spin');
+    }
+  }, 2200);
 }

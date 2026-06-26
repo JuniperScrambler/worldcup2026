@@ -180,9 +180,11 @@ function setupTabNavigation() {
 // --------------------------------------------------------------------------
 
 async function fetchRealNews() {
-  // RSSの外部変換サービス(rss2json)が持つCDNキャッシュをバイパスするため、URLにタイムスタンプを付与
-  const rssUrl = 'https://news.yahoo.co.jp/rss/topics/sports_soccer.xml?_t=' + Date.now();
-  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+  // Googleニュースからサッカー日本代表に関するRSSを取得（rss2jsonでJSON変換）
+  // 外部変換サービス(rss2json)のCDNキャッシュを回避するため、APIリクエスト自体にタイムスタンプを付与
+  const query = "サッカー日本代表";
+  const googleNewsUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=ja&gl=JP&ceid=JP:ja`;
+  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(googleNewsUrl)}&_t=${Date.now()}`;
   
   try {
     const res = await fetch(apiUrl);

@@ -40,10 +40,10 @@ const JAPAN_SQUAD = [
 ];
 
 const GROUP_F_STANDINGS = [
-  { rank: 1, name: "日本", flag: "🇯🇵", points: 4, matches: 2, won: 1, drawn: 1, lost: 0, gd: "+4" },
-  { rank: 2, name: "オランダ", flag: "🇳🇱", points: 4, matches: 2, won: 1, drawn: 1, lost: 0, gd: "+2" },
-  { rank: 3, name: "スウェーデン", flag: "🇸🇪", points: 3, matches: 2, won: 1, drawn: 0, lost: 1, gd: "-1" },
-  { rank: 4, name: "チュニジア", flag: "🇹🇳", points: 0, matches: 2, won: 0, drawn: 0, lost: 2, gd: "-5" }
+  { rank: 1, name: "オランダ", flag: "🇳🇱", points: 7, matches: 3, won: 2, drawn: 1, lost: 0, gd: "+6" },
+  { rank: 2, name: "日本", flag: "🇯🇵", points: 5, matches: 3, won: 1, drawn: 2, lost: 0, gd: "+4" },
+  { rank: 3, name: "スウェーデン", flag: "🇸🇪", points: 4, matches: 3, won: 1, drawn: 1, lost: 1, gd: "0" },
+  { rank: 4, name: "チュニジア", flag: "🇹🇳", points: 0, matches: 3, won: 0, drawn: 0, lost: 3, gd: "-10" }
 ];
 
 const POWERHOUSE_NATIONS = [
@@ -89,7 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initApp();
 });
 
+function updateHeaderDate() {
+  const headerDateEl = document.getElementById('headerDate');
+  if (headerDateEl) {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    headerDateEl.textContent = `${yyyy}.${mm}.${dd}`;
+  }
+}
+
 function initApp() {
+  updateHeaderDate();
   setupTabNavigation();
   renderDashboard();
   renderJapanTab();
@@ -195,7 +207,9 @@ async function fetchRealNews() {
       return data.items.slice(0, 5).map((item, idx) => {
         let dateStr = "今日";
         try {
-          const d = new Date(item.pubDate);
+          // rss2jsonのpubDateはタイムゾーン情報を含まない場合があるため、明示的にUTCとしてパース
+          const utcStr = item.pubDate.replace(" ", "T") + "Z";
+          const d = new Date(utcStr);
           dateStr = `${d.getMonth() + 1}月${d.getDate()}日 ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
         } catch(e) {}
         
@@ -728,25 +742,25 @@ const ALL_TEAMS = [
 ];
 
 const ACTUAL_MATCH_CARDS = [
-  // グループステージ実際のカード (オッズあり)
-  { id: "JPN_SWE", name: "日本 vs スウェーデン (6月25日)", teamA: "JPN", teamB: "SWE", odds: true },
-  { id: "NED_TUN", name: "オランダ vs チュニジア (6月25日)", teamA: "NED", teamB: "TUN", odds: true },
-  { id: "ARG_AUT", name: "アルゼンチン vs オーストリア (6月24日)", teamA: "ARG", teamB: "AUT", odds: true },
-  { id: "FRA_NOR", name: "フランス vs ノルウェー (6月24日)", teamA: "FRA", teamB: "NOR", odds: true },
-  { id: "BRA_SCO", name: "ブラジル vs スコットランド (6月24日)", teamA: "BRA", teamB: "SCO", odds: true },
-  { id: "ESP_URU", name: "スペイン vs ウルグアイ (6月25日)", teamA: "ESP", teamB: "URU", odds: true },
-  { id: "GER_ECU", name: "ドイツ vs エクアドル (6月25日)", teamA: "GER", teamB: "ECU", odds: true },
-  { id: "ENG_CRO", name: "イングランド vs クロアチア (6月25日)", teamA: "ENG", teamB: "CRO", odds: true },
-  
-  // 決勝トーナメント想定カード (オッズあり)
-  { id: "ARG_ENG", name: "【想定】アルゼンチン vs イングランド", teamA: "ARG", teamB: "ENG", odds: true },
-  { id: "ESP_GER", name: "【想定】スペイン vs ドイツ", teamA: "ESP", teamB: "GER", odds: true },
-  { id: "FRA_POR", name: "【想定】フランス vs ポルトガル", teamA: "FRA", teamB: "POR", odds: true },
-  { id: "BRA_JPN", name: "【想定】ブラジル vs 日本", teamA: "BRA", teamB: "JPN", odds: true },
+  // 決勝トーナメント ラウンド32 (オッズあり)
+  { id: "BRA_JPN", name: "ブラジル vs 日本 (日本時間 6月30日 02:00)", teamA: "BRA", teamB: "JPN", odds: true },
+  { id: "NED_CRO", name: "オランダ vs クロアチア (日本時間 6月29日 22:00)", teamA: "NED", teamB: "CRO", odds: true },
+  { id: "GER_SWE", name: "ドイツ vs スウェーデン (日本時間 6月29日 04:00)", teamA: "GER", teamB: "SWE", odds: true },
+  { id: "ESP_AUT", name: "スペイン vs オーストリア (日本時間 7月2日 02:00)", teamA: "ESP", teamB: "AUT", odds: true },
+  { id: "FRA_NOR", name: "フランス vs ノルウェー (日本時間 7月1日 05:00)", teamA: "FRA", teamB: "NOR", odds: true },
+  { id: "ARG_ENG", name: "アルゼンチン vs イングランド (想定・準々決勝)", teamA: "ARG", teamB: "ENG", odds: true },
 
-  // オッズなしの対戦済/対象外カード (テスト用)
-  { id: "JPN_NED", name: "日本 vs オランダ (対戦済・オッズなし)", teamA: "JPN", teamB: "NED", odds: false },
-  { id: "JPN_TUN", name: "日本 vs チュニジア (対戦済・オッズなし)", teamA: "JPN", teamB: "TUN", odds: false }
+  // グループステージ結果 (オッズなし・対戦済)
+  { id: "JPN_SWE", name: "日本 vs スウェーデン (最終結果 1-1)", teamA: "JPN", teamB: "SWE", odds: false },
+  { id: "NED_TUN", name: "オランダ vs チュニジア (最終結果 3-1)", teamA: "NED", teamB: "TUN", odds: false },
+  { id: "ARG_AUT", name: "アルゼンチン vs オーストリア (最終結果 2-0)", teamA: "ARG", teamB: "AUT", odds: false },
+  { id: "FRA_NOR_GP", name: "フランス vs ノルウェー (最終結果 3-2)", teamA: "FRA", teamB: "NOR", odds: false },
+  { id: "BRA_SCO", name: "ブラジル vs スコットランド (最終結果 2-0)", teamA: "BRA", teamB: "SCO", odds: false },
+  { id: "ESP_URU", name: "スペイン vs ウルグアイ (最終結果 1-1)", teamA: "ESP", teamB: "URU", odds: false },
+  { id: "GER_ECU", name: "ドイツ vs エクアドル (最終結果 2-1)", teamA: "GER", teamB: "ECU", odds: false },
+  { id: "ENG_CRO", name: "イングランド vs クロアチア (最終結果 1-1)", teamA: "ENG", teamB: "CRO", odds: false },
+  { id: "JPN_NED", name: "日本 vs オランダ (最終結果 2-2)", teamA: "JPN", teamB: "NED", odds: false },
+  { id: "JPN_TUN", name: "日本 vs チュニジア (最終結果 4-0)", teamA: "JPN", teamB: "TUN", odds: false }
 ];
 
 function renderPredictorTab() {

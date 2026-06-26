@@ -10,33 +10,33 @@ const JAPAN_SQUAD = [
   // GK
   { number: 1, name: "Z. Suzuki", kanji: "鈴木 彩艶", pos: "GK", club: "パルマ (ITA)", age: 23, rating: 84 },
   { number: 12, name: "K. Osako", kanji: "大迫 敬介", pos: "GK", club: "サンフレッチェ広島 (JPN)", age: 26, rating: 80 },
-  { number: 23, name: "T. Hayakawa", kanji: "早川 友基", pos: "GK", club: "名古屋グランパス (JPN)", age: 27, rating: 78 },
+  { number: 23, name: "T. Hayakawa", kanji: "早川 友基", pos: "GK", club: "鹿島アントラーズ (JPN)", age: 27, rating: 78 },
   // DF
-  { number: 4, name: "K. Itakura", kanji: "板倉 滉", pos: "DF", club: "ボルシアMG (GER)", age: 29, rating: 84 },
-  { number: 16, name: "T. Tomiyasu", kanji: "冨安 健洋", pos: "DF", club: "アーセナル (ENG)", age: 27, rating: 86 },
+  { number: 2, name: "Y. Sugawara", kanji: "菅原 由勢", pos: "DF", club: "ヴェルダー・ブレーメン (GER)", age: 26, rating: 82 },
   { number: 3, name: "S. Taniguchi", kanji: "谷口 彰悟", pos: "DF", club: "シント＝トロイデン (BEL)", age: 34, rating: 80 },
-  { number: 2, name: "Y. Sugawara", kanji: "菅原 由勢", pos: "DF", club: "サウサンプトン (ENG)", age: 26, rating: 82 },
-  { number: 21, name: "H. Ito", kanji: "伊藤 洋輝", pos: "DF", club: "バイエルン・ミュンヘン (GER)", age: 27, rating: 85 },
-  { number: 22, name: "A. Seko", kanji: "瀬古 歩夢", pos: "DF", club: "グラスホッパー (SUI)", age: 26, rating: 79 },
-  { number: 15, name: "T. Watanabe", kanji: "渡辺 剛", pos: "DF", club: "ヘント (BEL)", age: 29, rating: 80 },
+  { number: 4, name: "K. Itakura", kanji: "板倉 滉", pos: "DF", club: "アヤックス (NED)", age: 29, rating: 84 },
   { number: 5, name: "Y. Nagatomo", kanji: "長友 佑都", pos: "DF", club: "FC東京 (JPN)", age: 39, rating: 75 },
-  { number: 24, name: "J. Suzuki", kanji: "鈴木 準之輔", pos: "DF", club: "湘南ベルマーレ (JPN)", age: 23, rating: 74 },
+  { number: 16, name: "T. Watanabe", kanji: "渡辺 剛", pos: "DF", club: "フェイエノールト (NED)", age: 29, rating: 80 },
+  { number: 20, name: "A. Seko", kanji: "瀬古 歩夢", pos: "DF", club: "ル・アーヴルAC (FRA)", age: 26, rating: 79 },
+  { number: 21, name: "H. Ito", kanji: "伊藤 洋輝", pos: "DF", club: "バイエルン・ミュンヘン (GER)", age: 27, rating: 85 },
+  { number: 22, name: "T. Tomiyasu", kanji: "冨安 健洋", pos: "DF", club: "アヤックス (NED)", age: 27, rating: 86 },
+  { number: 25, name: "J. Suzuki", kanji: "鈴木 淳之介", pos: "DF", club: "FCコペンハーゲン (DEN)", age: 23, rating: 74 },
   // MF
-  { number: 6, name: "W. Endo", kanji: "遠藤 航", pos: "MF", club: "リヴァプール (ENG)", age: 33, rating: 85 },
-  { number: 17, name: "A. Tanaka", kanji: "田中 碧", pos: "MF", club: "リーズ (ENG)", age: 27, rating: 82 },
-  { number: 8, name: "D. Kamada", kanji: "鎌田 大地", pos: "MF", club: "クリスタル・パレス (ENG)", age: 29, rating: 83 },
-  { number: 7, name: "T. Kubo", kanji: "久保 建英", pos: "MF", club: "レアル・ソシエダ (ESP)", age: 25, rating: 87 },
-  { number: 10, name: "R. Doan", kanji: "堂安 律", pos: "MF", club: "フライブルク (GER)", age: 28, rating: 83 },
-  { number: 14, name: "J. Ito", kanji: "伊東 純也", pos: "MF", club: "スタッド・ランス (FRA)", age: 33, rating: 84 },
+  { number: 7, name: "A. Tanaka", kanji: "田中 碧", pos: "MF", club: "リーズ (ENG)", age: 27, rating: 82 },
+  { number: 8, name: "T. Kubo", kanji: "久保 建英", pos: "MF", club: "レアル・ソシエダ (ESP)", age: 25, rating: 87 },
+  { number: 10, name: "R. Doan", kanji: "堂安 律", pos: "MF", club: "フランクフルト (GER)", age: 28, rating: 83 },
   { number: 13, name: "K. Nakamura", kanji: "中村 敬斗", pos: "MF", club: "スタッド・ランス (FRA)", age: 25, rating: 82 },
-  { number: 20, name: "K. Sano", kanji: "佐野 海舟", pos: "MF", club: "マインツ (GER)", age: 25, rating: 79 },
-  { number: 26, name: "Y. Suzuki", kanji: "鈴木 唯人", pos: "MF", club: "ブレンビー (DEN)", age: 24, rating: 81 },
+  { number: 14, name: "J. Ito", kanji: "伊東 純也", pos: "MF", club: "ゲンク (BEL)", age: 33, rating: 84 },
+  { number: 15, name: "D. Kamada", kanji: "鎌田 大地", pos: "MF", club: "クリスタル・パレス (ENG)", age: 29, rating: 83 },
+  { number: 17, name: "Y. Suzuki", kanji: "鈴木 唯人", pos: "MF", club: "フリーブルク (GER)", age: 24, rating: 81 },
+  { number: 24, name: "K. Sano", kanji: "佐野 海舟", pos: "MF", club: "マインツ (GER)", age: 25, rating: 79 },
   // FW
-  { number: 9, name: "A. Ueda", kanji: "上田 綺世", pos: "FW", club: "フェイエノールト (NED)", age: 27, rating: 83 },
+  { number: 6, name: "S. Machino", kanji: "町野 修斗", pos: "FW", club: "ボルシアMG (GER)", age: 26, rating: 78 },
+  { number: 9, name: "K. Goto", kanji: "後藤 啓介", pos: "FW", club: "フリーブルク (GER)", age: 21, rating: 76 },
   { number: 11, name: "D. Maeda", kanji: "前田 大然", pos: "FW", club: "セルティック (SCO)", age: 28, rating: 81 },
-  { number: 18, name: "K. Ogawa", kanji: "小川 航基", pos: "FW", club: "NECナイメヘン (NED)", age: 28, rating: 80 },
-  { number: 19, name: "K. Goto", kanji: "後藤 啓介", pos: "FW", club: "アンデルレヒト (BEL)", age: 21, rating: 76 },
-  { number: 25, name: "K. Shiogai", kanji: "塩貝 健人", pos: "FW", club: "N.E.C. (NED)", age: 21, rating: 73 }
+  { number: 18, name: "A. Ueda", kanji: "上田 綺世", pos: "FW", club: "フェイエノールト (NED)", age: 27, rating: 83 },
+  { number: 19, name: "K. Ogawa", kanji: "小川 航基", pos: "FW", club: "NECナイメヘン (NED)", age: 28, rating: 80 },
+  { number: 26, name: "K. Shiogai", kanji: "塩貝 健人", pos: "FW", club: "ヴォルフスブルク (GER)", age: 21, rating: 73 }
 ];
 
 const GROUP_F_STANDINGS = [

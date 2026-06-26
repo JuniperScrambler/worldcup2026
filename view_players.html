@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>登録画像・選手対応確認用ギャラリー</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    .img-wrap {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #0f172a;
+      border: 3px solid #3b82f6;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .filename {
+      font-size: 0.85em;
+      color: #3b82f6;
+      font-weight: bold;
+      background: #0f172a;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    .name {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      color: #f1f5f9;
+    }
+    .pos-club {
+      font-size: 0.9em;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚽ 登録画像・選手対応確認用ギャラリー</h1>
+  <div class="subtitle">
+    表示されている写真と選手名が一致しているかご確認ください。ファイル名と顔写真のズレがひと目でわかります。
+  </div>
+  <div class="grid" id="gallery"></div>
+
+  <script>
+    const squad = [
+      { number: 1, name: "鈴木 彩艶", pos: "GK", club: "パルマ (ITA)" },
+      { number: 12, name: "大迫 敬介", pos: "GK", club: "サンフレッチェ広島 (JPN)" },
+      { number: 23, name: "早川 友基", pos: "GK", club: "鹿島アントラーズ (JPN)" },
+      { number: 2, name: "菅原 由勢", pos: "DF", club: "ヴェルダー・ブレーメン (GER)" },
+      { number: 3, name: "谷口 彰悟", pos: "DF", club: "シント＝トロイデン (BEL)" },
+      { number: 4, name: "板倉 滉", pos: "DF", club: "アヤックス (NED)" },
+      { number: 5, name: "長友 佑都", pos: "DF", club: "FC東京 (JPN)" },
+      { number: 16, name: "渡辺 剛", pos: "DF", club: "フェイエノールト (NED)" },
+      { number: 20, name: "瀬古 歩夢", pos: "DF", club: "ル・アーヴルAC (FRA)" },
+      { number: 21, name: "伊藤 洋輝", pos: "DF", club: "バイエルン・ミュンヘン (GER)" },
+      { number: 22, name: "冨安 健洋", pos: "DF", club: "アヤックス (NED)" },
+      { number: 25, name: "鈴木 淳之介", pos: "DF", club: "FCコペンハーゲン (DEN)" },
+      { number: 7, name: "田中 碧", pos: "MF", club: "リーズ (ENG)" },
+      { number: 8, name: "久保 建英", pos: "MF", club: "レアル・ソシエダ (ESP)" },
+      { number: 10, name: "堂安 律", pos: "MF", club: "フランクフルト (GER)" },
+      { number: 13, name: "中村 敬斗", pos: "MF", club: "スタッド・ランス (FRA)" },
+      { number: 14, name: "伊東 純也", pos: "MF", club: "ゲンク (BEL)" },
+      { number: 15, name: "鎌田 大地", pos: "MF", club: "クリスタル・パレス (ENG)" },
+      { number: 17, name: "鈴木 唯人", pos: "MF", club: "フリーブルク (GER)" },
+      { number: 24, name: "佐野 海舟", pos: "MF", club: "マインツ (GER)" },
+      { number: 6, name: "町野 修斗", pos: "FW", club: "ボルシアMG (GER)" },
+      { number: 9, name: "後藤 啓介", pos: "FW", club: "フリーブルク (GER)" },
+      { number: 11, name: "前田 大然", pos: "FW", club: "セルティック (SCO)" },
+      { number: 18, name: "上田 綺世", pos: "FW", club: "フェイエノールト (NED)" },
+      { number: 19, name: "小川 航基", pos: "FW", club: "NECナイメヘン (NED)" },
+      { number: 26, name: "塩貝 健人", pos: "FW", club: "ヴォルフスブルク (GER)" }
+    ];
+
+    const container = document.getElementById('gallery');
+    container.innerHTML = squad.map(p => `
+      <div class="card">
+        <span class="filename">${p.number}.jpg として登録中</span>
+        <div class="img-wrap">
+          <img src="assets/players/${p.number}.jpg" alt="${p.name}" onerror="this.style.display='none';">
+        </div>
+        <div class="name">${p.name}</div>
+        <div class="pos-club">背番号 ${p.number} | ${p.pos}<br>${p.club}</div>
+      </div>
+    `).join('');
+  </script>
+</body>
+</html>

@@ -176,15 +176,12 @@ function setupTabNavigation() {
   });
 
   // Shortcut from Japan Match card to Predictor Tab
-  const predictShortcut = document.querySelector('.predict-btn-shortcut');
-  if (predictShortcut) {
-    predictShortcut.addEventListener('click', () => {
-      const predictorNavItem = document.querySelector('.app-navbar .nav-item[data-tab="predictor"]');
-      if (predictorNavItem) {
-        predictorNavItem.click();
-      }
-    });
-  }
+  window.goToPredictorTab = function() {
+    const predictorNavItem = document.querySelector('.app-navbar .nav-item[data-tab="predictor"]');
+    if (predictorNavItem) {
+      predictorNavItem.click();
+    }
+  };
 }
 
 // --------------------------------------------------------------------------

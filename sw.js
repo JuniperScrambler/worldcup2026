@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wc2026-hub-v5';
+const CACHE_NAME = 'wc2026-hub-v6';
 const ASSETS = [
   './',
   './index.html',

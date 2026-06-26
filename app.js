@@ -96,7 +96,9 @@ function updateHeaderDate() {
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
-    headerDateEl.textContent = `${yyyy}.${mm}.${dd}`;
+    const hh = String(now.getHours()).padStart(2, '0');
+    const min = String(now.getMinutes()).padStart(2, '0');
+    headerDateEl.textContent = `${yyyy}.${mm}.${dd} ${hh}:${min} 更新`;
   }
 }
 
@@ -110,6 +112,16 @@ function initApp() {
   renderPowersTab();
   setupIOSInstallBanner();
   setupPullToRefresh();
+
+  // 引っ張り更新時の現在のタブを復元して、ホームに戻るのを防止
+  const savedTab = sessionStorage.getItem('wc2026_saved_tab');
+  if (savedTab) {
+    sessionStorage.removeItem('wc2026_saved_tab');
+    const tabBtn = document.querySelector(`.app-navbar .nav-item[data-tab="${savedTab}"]`);
+    if (tabBtn) {
+      tabBtn.click();
+    }
+  }
 
   // 更新リロードから復帰した際にトースト通知を表示
   const showToastFlag = sessionStorage.getItem('wc2026_show_refresh_toast');
@@ -234,7 +246,7 @@ async function fetchRealNews() {
 
 function renderDashboard() {
   // Countdown Timer
-  const matchDate = new Date('2026-06-25T16:00:00');
+  const matchDate = new Date('2026-06-30T02:00:00');
   
   function updateCountdown() {
     const now = new Date();
@@ -1295,6 +1307,7 @@ function setupPullToRefresh() {
       
       // リロード後にトーストを表示するためのフラグを設定
       sessionStorage.setItem('wc2026_show_refresh_toast', 'true');
+      sessionStorage.setItem('wc2026_saved_tab', currentTab);
 
       // サービスワーカーのアップデートを強制確認してから、画面をクリーンリロードする
       if ('serviceWorker' in navigator) {

@@ -1206,8 +1206,12 @@ function setupPullToRefresh() {
   const maxPull = 100;       // 最大プル深度 (px)
 
   document.addEventListener('touchstart', (e) => {
-    // スクロール位置が最上部のときのみジェスチャーを許可
-    if (window.scrollY === 0) {
+    // モーダルが表示されている場合は更新ジェスチャーを無効化
+    if (document.querySelector('.modal-overlay.active')) return;
+
+    // スクロール位置が最上部のときのみジェスチャーを許可 (iOS Safariのバウンスによるマイナス値や端数も考慮)
+    const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (scrollTop <= 0) {
       startY = e.touches[0].pageY;
       isPulling = true;
       

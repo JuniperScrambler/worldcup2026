@@ -98,6 +98,15 @@ function initApp() {
   renderPowersTab();
   setupIOSInstallBanner();
   setupPullToRefresh();
+
+  // 更新リロードから復帰した際にトースト通知を表示
+  const showToastFlag = sessionStorage.getItem('wc2026_show_refresh_toast');
+  if (showToastFlag === 'true') {
+    sessionStorage.removeItem('wc2026_show_refresh_toast');
+    setTimeout(() => {
+      showToast("最新情報に更新しました");
+    }, 600);
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -171,7 +180,8 @@ function setupTabNavigation() {
 // --------------------------------------------------------------------------
 
 async function fetchRealNews() {
-  const rssUrl = 'https://news.yahoo.co.jp/rss/topics/sports_soccer.xml';
+  // RSSの外部変換サービス(rss2json)が持つCDNキャッシュをバイパスするため、URLにタイムスタンプを付与
+  const rssUrl = 'https://news.yahoo.co.jp/rss/topics/sports_soccer.xml?_t=' + Date.now();
   const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
   
   try {
@@ -1270,46 +1280,23 @@ function setupPullToRefresh() {
       ptrText.style.color = "var(--color-success)";
       ptr.style.height = '60px';
       
-      // 動的データの更新
-      Promise.all([
-        fetchRealNews().then(realNews => {
-          const newsListContainer = document.getElementById('homeNewsList');
-          if (newsListContainer && realNews && realNews.length > 0) {
-            newsListContainer.innerHTML = realNews.map(news => {
-              const isLink = !!news.link;
-              const tagType = isLink ? 'a' : 'div';
-              const linkAttr = isLink ? `href="${news.link}" target="_blank" rel="noopener noreferrer"` : '';
-              return `
-                <${tagType} class="news-card" ${linkAttr}>
-                  <span class="news-tag-dot ${news.tag}"></span>
-                  <div class="news-content">
-                    <div class="news-meta">
-                      <span>${isLink ? 'REALTIME NEWS' : 'SAMURAI BLUE'}</span>
-                      <span>${news.date}</span>
-                    </div>
-                    <div class="news-title">${news.title}</div>
-                  </div>
-                </${tagType}>
-              `;
-            }).join('');
-          }
-        }),
-        // SWのチェックを強制
-        ('serviceWorker' in navigator) ? navigator.serviceWorker.ready.then(reg => reg.update()) : Promise.resolve()
-      ]).then(() => {
-        showToast("最新情報に更新しました");
-      }).catch((err) => {
-        console.warn("Pull-to-refresh check failed:", err);
-        showToast("更新に失敗しました");
-      }).finally(() => {
+      // リロード後にトーストを表示するためのフラグを設定
+      sessionStorage.setItem('wc2026_show_refresh_toast', 'true');
+
+      // サービスワーカーのアップデートを強制確認してから、画面をクリーンリロードする
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.update().finally(() => {
+            setTimeout(() => {
+              window.location.reload();
+            }, 600);
+          });
+        });
+      } else {
         setTimeout(() => {
-          ptr.style.height = '0';
-          ptr.style.marginBottom = '0';
-          ptr.classList.remove('active');
-          ptr.classList.remove('refreshing');
-          ptrIconWrap.style.transform = 'rotate(0deg)';
+          window.location.reload();
         }, 600);
-      });
+      }
     } else {
       // キャンセル
       ptr.style.height = '0';

@@ -39,29 +39,17 @@ const JAPAN_SQUAD = [
   { number: 26, name: "K. Shiogai", kanji: "塩貝 健人", pos: "FW", club: "ヴォルフスブルク (GER)", age: 21, rating: 73 }
 ];
 
-const GROUP_F_STANDINGS = [
-  { rank: 1, name: "オランダ", flag: "🇳🇱", points: 7, matches: 3, won: 2, drawn: 1, lost: 0, gd: "+6" },
-  { rank: 2, name: "日本", flag: "🇯🇵", points: 5, matches: 3, won: 1, drawn: 2, lost: 0, gd: "+4" },
-  { rank: 3, name: "スウェーデン", flag: "🇸🇪", points: 4, matches: 3, won: 1, drawn: 1, lost: 1, gd: "0" },
-  { rank: 4, name: "チュニジア", flag: "🇹🇳", points: 0, matches: 3, won: 0, drawn: 0, lost: 3, gd: "-10" }
-];
-
 const POWERHOUSE_NATIONS = [
-  { name: "アルゼンチン (前回王者)", flag: "🇦🇷", group: "グループJ (1位)", keyPlayer: "リオネル・メッシ", rating: 92, titles: 3, desc: "メッシのラストダンス。盤石の連携と勝負強さで連覇を狙う。" },
-  { name: "フランス", flag: "🇫🇷", group: "グループI (2位)", keyPlayer: "キリアン・エムバペ", rating: 91, titles: 2, desc: "世界最強の攻撃陣を擁する。圧倒的な個の力とスピードで他を圧倒。" },
-  { name: "ブラジル", flag: "🇧🇷", group: "グループC (1位)", keyPlayer: "ヴィニシウス・ジュニオール", rating: 90, titles: 5, desc: "伝統の王国。復調した攻撃陣と硬い守備で6度目の頂点を目指す。" },
-  { name: "イングランド", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "グループL (1位)", keyPlayer: "ジュード・ベリンガム", rating: 89, titles: 1, desc: "若きタレントが融合。今度こそ「It's coming home」を果たせるか。" },
-  { name: "ポルトガル", flag: "🇵🇹", group: "グループK (1位)", keyPlayer: "ブルーノ・フェルナンデス", rating: 88, titles: 0, desc: "新世代の攻撃陣が躍動。堅守と創造性豊かな中盤で初優勝へ。" },
-  { name: "スペイン", flag: "🇪🇸", group: "グループH (1位)", keyPlayer: "ラミン・ヤマル", rating: 89, titles: 1, desc: "圧倒的なポゼッションスタイル。若きエース、ヤマルの突破力に注目。" },
-  { name: "ドイツ", flag: "🇩🇪", group: "グループE (1位)", keyPlayer: "ジャマル・ムシアラ", rating: 88, titles: 4, desc: "開催国カナダ・アメリカ・メキシコで復活の狼煙をあげる古豪。" }
+  { id: "ARG", name: "アルゼンチン (前回王者)", flag: "🇦🇷", group: "グループJ (1位)", keyPlayer: "リオネル・メッシ", rating: 92, titles: 3, desc: "メッシのラストダンス。盤石の連携と勝負強さで連覇を狙う。" },
+  { id: "FRA", name: "フランス", flag: "🇫🇷", group: "グループI (2位)", keyPlayer: "キリアン・エムバペ", rating: 91, titles: 2, desc: "世界最強の攻撃陣を擁する。圧倒的な個の力とスピードで他を圧倒。" },
+  { id: "BRA", name: "ブラジル", flag: "🇧🇷", group: "グループC (1位)", keyPlayer: "ヴィニシウス・ジュニオール", rating: 90, titles: 5, desc: "伝統の王国。復調した攻撃陣と硬い守備で6度目の頂点を目指す。" },
+  { id: "ENG", name: "イングランド", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "グループL (1位)", keyPlayer: "ジュード・ベリンガム", rating: 89, titles: 1, desc: "若きタレントが融合。今度こそ「It's coming home」を果たせるか。" },
+  { id: "POR", name: "ポルトガル", flag: "🇵🇹", group: "グループK (1位)", keyPlayer: "ブルーノ・フェルナンデス", rating: 88, titles: 0, desc: "新世代の攻撃陣が躍動。堅守と創造性豊かな中盤で初優勝へ。" },
+  { id: "ESP", name: "スペイン", flag: "🇪🇸", group: "グループH (1位)", keyPlayer: "ラミン・ヤマル", rating: 89, titles: 1, desc: "圧倒的なポゼッションスタイル。若きエース、ヤマルの突破力に注目。" },
+  { id: "GER", name: "ドイツ", flag: "🇩🇪", group: "グループE (1位)", keyPlayer: "ジャマル・ムシアラ", rating: 88, titles: 4, desc: "開催国カナダ・アメリカ・メキシコで復活の狼煙をあげる古豪。" }
 ];
 
-const SIMULATED_NEWS = [
-  { id: 1, tag: "red", date: "6月22日 09:30", title: "【速報】久保建英、全体練習に完全合流。スウェーデン戦での先発復帰へ視界良好" },
-  { id: 2, tag: "blue", date: "6月21日 18:00", title: "森保監督インタビュー「チュニジア戦の4得点は収穫。スウェーデン戦は勝ち点3に徹する」" },
-  { id: 3, tag: "gold", date: "6月21日 11:15", title: "好調・上田綺世が語る決意「得点王は意識していない。チームがグループ突破を決めるゴールを」" },
-  { id: 4, tag: "blue", date: "6月20日 23:45", title: "チュニジア戦大勝の立役者、中村敬斗の圧巻ミドルシュートが大会ベストゴール候補に浮上" }
-];
+const LIVE_DATA_CACHE_KEY = 'wc2026_live_data_v1';
 
 // --------------------------------------------------------------------------
 // 2. Global State & App Setup
@@ -71,16 +59,34 @@ let currentTab = 'home';
 let selectedPitchNode = null;
 let savedStartingXI = {}; // Format: { "CF": playerNumber, "LWG": playerNumber... }
 let bracketPredictions = {}; // Format: { "q1": "ARG", "sf1": "ARG", "f": "ARG" }
+let liveMatches = [];
+let liveStandings = [];
+let liveNews = [];
+let lastSuccessfulRefresh = 0;
+let refreshPromise = null;
+let countdownInterval = null;
 
 // Load state from localStorage on startup
 function loadState() {
-  const xi = localStorage.getItem('wc2026_starting_xi');
-  if (xi) {
-    savedStartingXI = JSON.parse(xi);
+  try {
+    const xi = localStorage.getItem('wc2026_starting_xi');
+    if (xi) savedStartingXI = JSON.parse(xi);
+    const bp = localStorage.getItem('wc2026_bracket_preds');
+    if (bp) bracketPredictions = JSON.parse(bp);
+  } catch (error) {
+    console.warn('Saved user settings could not be restored:', error);
   }
-  const bp = localStorage.getItem('wc2026_bracket_preds');
-  if (bp) {
-    bracketPredictions = JSON.parse(bp);
+
+  try {
+    const cached = JSON.parse(localStorage.getItem(LIVE_DATA_CACHE_KEY) || 'null');
+    if (cached) {
+      liveMatches = Array.isArray(cached.matches) ? cached.matches : [];
+      liveStandings = Array.isArray(cached.standings) ? cached.standings : [];
+      liveNews = Array.isArray(cached.news) ? cached.news : [];
+      lastSuccessfulRefresh = Date.parse(cached.fetchedAt) || 0;
+    }
+  } catch (error) {
+    console.warn('Cached live data could not be restored:', error);
   }
 }
 
@@ -89,21 +95,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initApp();
 });
 
-function updateHeaderDate() {
+function updateHeaderDate(date = null, suffix = '更新') {
   const headerDateEl = document.getElementById('headerDate');
   if (headerDateEl) {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    const hh = String(now.getHours()).padStart(2, '0');
-    const min = String(now.getMinutes()).padStart(2, '0');
-    headerDateEl.textContent = `${yyyy}.${mm}.${dd} ${hh}:${min} 更新`;
+    if (!date || Number.isNaN(date.getTime())) {
+      headerDateEl.textContent = '最新情報を確認中';
+      return;
+    }
+    const formatter = new Intl.DateTimeFormat('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    });
+    headerDateEl.textContent = `${formatter.format(date).replaceAll('/', '.')} ${suffix}`;
   }
 }
 
+function setConnectionStatus(state, text) {
+  const status = document.getElementById('connectionStatus');
+  const statusText = document.getElementById('connectionStatusText');
+  if (!status || !statusText) return;
+  status.classList.toggle('updating', state === 'updating');
+  status.classList.toggle('offline', state === 'offline');
+  statusText.textContent = text;
+}
+
 function initApp() {
-  updateHeaderDate();
+  updateHeaderDate(lastSuccessfulRefresh ? new Date(lastSuccessfulRefresh) : null, lastSuccessfulRefresh ? '保存データ' : '更新');
   setupTabNavigation();
   renderDashboard();
   renderJapanTab();
@@ -112,6 +130,7 @@ function initApp() {
   renderPowersTab();
   setupIOSInstallBanner();
   setupPullToRefresh();
+  setupAutomaticRefresh();
 
   // 引っ張り更新時の現在のタブを復元して、ホームに戻るのを防止
   const savedTab = sessionStorage.getItem('wc2026_saved_tab');
@@ -131,6 +150,8 @@ function initApp() {
       showToast("最新情報に更新しました");
     }, 600);
   }
+
+  refreshLiveData({ reason: 'startup' });
 }
 
 // --------------------------------------------------------------------------
@@ -203,12 +224,15 @@ function setupTabNavigation() {
 async function fetchRealNews() {
   // Googleニュースからサッカー日本代表に関するRSSを取得（rss2jsonでJSON変換）
   // 外部変換サービス(rss2json)のCDNキャッシュを回避するため、APIリクエスト自体にタイムスタンプを付与
-  const query = "サッカー日本代表";
+  const query = "FIFA ワールドカップ 2026 日本代表";
   const googleNewsUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=ja&gl=JP&ceid=JP:ja`;
   const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(googleNewsUrl)}&_t=${Date.now()}`;
-  
+  const fallbackPromise = fetchWorldCupNewsFallback();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 7000);
+
   try {
-    const res = await fetch(apiUrl);
+    const res = await fetch(apiUrl, { cache: 'no-store', signal: controller.signal });
     if (!res.ok) throw new Error('Network response was not ok');
     const data = await res.json();
     
@@ -216,10 +240,12 @@ async function fetchRealNews() {
       return data.items.slice(0, 5).map((item, idx) => {
         let dateStr = "今日";
         try {
-          // rss2jsonのpubDateはタイムゾーン情報を含まない場合があるため、明示的にUTCとしてパース
-          const utcStr = item.pubDate.replace(" ", "T") + "Z";
-          const d = new Date(utcStr);
-          dateStr = `${d.getMonth() + 1}月${d.getDate()}日 ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+          const rawDate = item.pubDate || '';
+          const parsedDate = new Date(/[zZ]|[+-]\d\d:?\d\d$/.test(rawDate) ? rawDate : `${rawDate.replace(' ', 'T')}Z`);
+          dateStr = new Intl.DateTimeFormat('ja-JP', {
+            timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', hour12: false
+          }).format(parsedDate);
         } catch(e) {}
         
         let tag = "blue";
@@ -239,87 +265,484 @@ async function fetchRealNews() {
       });
     }
   } catch (error) {
-    console.warn("Failed to fetch RSS news, falling back to simulated news:", error);
+    console.warn("Failed to fetch RSS news:", error);
+  } finally {
+    clearTimeout(timeoutId);
   }
-  return null;
+  return fallbackPromise;
+}
+
+async function fetchWorldCupNewsFallback() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 7000);
+  try {
+    const response = await fetch(
+      `https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/news?limit=6&_=${Date.now()}`,
+      { cache: 'no-store', signal: controller.signal }
+    );
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    return (data.articles || []).slice(0, 5).map((article, index) => ({
+      id: `espn-news-${article.id || index}`,
+      tag: index === 0 ? 'red' : index % 2 ? 'blue' : 'gold',
+      date: new Intl.DateTimeFormat('ja-JP', {
+        timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      }).format(new Date(article.published)),
+      title: article.headline,
+      link: article.links?.web?.href
+    }));
+  } catch (error) {
+    console.warn('Fallback news refresh failed:', error);
+    return null;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  })[char]);
+}
+
+function safeExternalUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.href : '';
+  } catch (error) {
+    return '';
+  }
+}
+
+function formatMatchDate(dateValue) {
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return '日時未定';
+  return new Intl.DateTimeFormat('ja-JP', {
+    timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', weekday: 'short',
+    hour: '2-digit', minute: '2-digit', hour12: false
+  }).format(date);
+}
+
+function formatMatchStatus(match) {
+  if (match.state === 'in') return `LIVE ${match.displayClock || match.statusDetail}`.trim();
+  if (match.state === 'post' || match.completed) return '試合終了';
+  return '開始前';
+}
+
+const TOURNAMENT_STAGE_CONFIG = [
+  { id: 'round-of-32', label: 'ラウンド32', shortLabel: 'R32' },
+  { id: 'round-of-16', label: 'ラウンド16', shortLabel: 'R16' },
+  { id: 'quarterfinals', label: '準々決勝', shortLabel: 'QF' },
+  { id: 'semifinals', label: '準決勝', shortLabel: 'SF' },
+  { id: '3rd-place-match', label: '3位決定戦', shortLabel: '3rd' },
+  { id: 'final', label: '決勝', shortLabel: 'FINAL' }
+];
+
+function tournamentStatusClass(match) {
+  if (match.state === 'in') return 'live';
+  if (match.state === 'post' || match.completed) return 'completed';
+  return 'upcoming';
+}
+
+function renderLiveBracketMatch(match, index) {
+  const statusClass = tournamentStatusClass(match);
+  return `
+    <article class="live-bracket-match ${statusClass}">
+      <div class="live-bracket-match-meta">
+        <span>第${index + 1}試合</span>
+        <span>${escapeHTML(formatMatchDate(match.date))}</span>
+      </div>
+      <div class="live-bracket-teams">
+        ${match.teams.map(team => `
+          <div class="live-bracket-team ${team.winner || team.advanced ? 'winner' : ''} ${!team.logo ? 'placeholder' : ''}">
+            <span class="live-bracket-flag">${escapeHTML(team.flag)}</span>
+            <span class="live-bracket-team-name">${escapeHTML(team.name)}</span>
+            <strong>${match.state === 'pre' ? '-' : escapeHTML(team.score)}</strong>
+          </div>
+        `).join('')}
+      </div>
+      <div class="live-bracket-status ${statusClass}">${escapeHTML(formatMatchStatus(match))}</div>
+    </article>
+  `;
+}
+
+function renderTournamentBracket(knockoutMatches) {
+  const container = document.getElementById('liveTournamentBracket');
+  if (!container) return;
+  const bracketStages = TOURNAMENT_STAGE_CONFIG.filter(stage => stage.id !== '3rd-place-match');
+
+  if (!knockoutMatches.length) {
+    container.innerHTML = '<div class="tournament-loading">最新のトーナメント表を取得中...</div>';
+    return;
+  }
+
+  container.innerHTML = bracketStages.map(stage => {
+    const matches = knockoutMatches
+      .filter(match => match.stage === stage.id)
+      .sort((a, b) => Number(a.id) - Number(b.id));
+    return `
+      <section class="live-bracket-round" data-stage="${stage.id}">
+        <div class="live-bracket-round-title">
+          <span>${escapeHTML(stage.shortLabel)}</span>
+          <strong>${escapeHTML(stage.label)}</strong>
+        </div>
+        <div class="live-bracket-round-matches">
+          ${matches.length
+            ? matches.map((match, index) => renderLiveBracketMatch(match, index)).join('')
+            : '<div class="live-bracket-empty">組み合わせ未定</div>'}
+        </div>
+      </section>
+    `;
+  }).join('');
+}
+
+function renderTournamentSchedule(knockoutMatches) {
+  const container = document.getElementById('knockoutScheduleList');
+  if (!container) return;
+  if (!knockoutMatches.length) {
+    container.innerHTML = '<div class="match-card empty-state-card">最新の日程・結果を取得中...</div>';
+    return;
+  }
+
+  const featured = window.WorldCupLiveData?.selectFeaturedMatch(knockoutMatches);
+  container.innerHTML = TOURNAMENT_STAGE_CONFIG.map(stage => {
+    const bracketOrder = knockoutMatches
+      .filter(match => match.stage === stage.id)
+      .sort((a, b) => Number(a.id) - Number(b.id));
+    const matches = bracketOrder
+      .slice()
+      .sort((a, b) => a.timestamp - b.timestamp);
+    if (!matches.length) return '';
+    return `
+      <section class="knockout-stage-group">
+        <div class="knockout-stage-heading">
+          <h4>${escapeHTML(stage.label)}</h4>
+          <span>${matches.length}試合</span>
+        </div>
+        <div class="knockout-stage-matches">
+          ${matches.map((match, index) => {
+            const statusClass = tournamentStatusClass(match);
+            const detailUrl = safeExternalUrl(match.link);
+            const matchNumber = bracketOrder.findIndex(item => item.id === match.id) + 1;
+            return `
+              <article class="knockout-schedule-card ${statusClass} ${featured?.id === match.id ? 'highlight' : ''}">
+                <div class="knockout-schedule-meta">
+                  <span>第${matchNumber || index + 1}試合・${escapeHTML(formatMatchDate(match.date))}</span>
+                  <strong class="schedule-status ${statusClass}">${escapeHTML(formatMatchStatus(match))}</strong>
+                </div>
+                <div class="knockout-schedule-teams">
+                  ${match.teams.map(team => `
+                    <div class="schedule-team-row ${team.winner || team.advanced ? 'winner' : ''}">
+                      <span class="flag">${escapeHTML(team.flag)}</span>
+                      <span class="team-name">${escapeHTML(team.name)}</span>
+                      <strong class="score">${match.state === 'pre' ? '-' : escapeHTML(team.score)}</strong>
+                    </div>
+                  `).join('')}
+                </div>
+                <div class="knockout-schedule-footer">
+                  <span>${escapeHTML([match.venue, match.city].filter(Boolean).join('・') || '会場未定')}</span>
+                  ${detailUrl ? `<a href="${escapeHTML(detailUrl)}" target="_blank" rel="noopener noreferrer">試合詳細 ↗</a>` : ''}
+                </div>
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
+}
+
+function renderLiveTournament() {
+  const knockoutMatches = window.WorldCupLiveData?.knockoutMatches(liveMatches) || [];
+  renderTournamentBracket(knockoutMatches);
+  renderTournamentSchedule(knockoutMatches);
+
+  const updatedAt = document.getElementById('tournamentUpdatedAt');
+  if (updatedAt) {
+    updatedAt.textContent = lastSuccessfulRefresh
+      ? `${new Intl.DateTimeFormat('ja-JP', {
+        timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      }).format(new Date(lastSuccessfulRefresh))} 更新`
+      : '最新情報を取得中';
+  }
+}
+
+function renderNewsList(newsItems = liveNews) {
+  const newsListContainer = document.getElementById('homeNewsList');
+  if (!newsListContainer) return;
+
+  if (!newsItems.length) {
+    newsListContainer.innerHTML = '<div class="news-card empty-state-card">最新ニュースを取得中...</div>';
+    return;
+  }
+
+  newsListContainer.innerHTML = newsItems.map(news => {
+    const link = safeExternalUrl(news.link);
+    const tagType = link ? 'a' : 'div';
+    const linkAttr = link ? `href="${escapeHTML(link)}" target="_blank" rel="noopener noreferrer"` : '';
+    const tag = ['red', 'blue', 'gold'].includes(news.tag) ? news.tag : 'blue';
+    return `
+      <${tagType} class="news-card" ${linkAttr}>
+        <span class="news-tag-dot ${tag}"></span>
+        <div class="news-content">
+          <div class="news-meta">
+            <span>REALTIME NEWS</span>
+            <span>${escapeHTML(news.date)}</span>
+          </div>
+          <div class="news-title">${escapeHTML(news.title)}</div>
+        </div>
+      </${tagType}>
+    `;
+  }).join('');
+}
+
+function renderGroupStandings(standings = liveStandings) {
+  const tableContainer = document.getElementById('homeGroupTable');
+  if (!tableContainer) return;
+
+  if (!standings.length) {
+    tableContainer.innerHTML = '<tr><td colspan="8">最新順位を取得中...</td></tr>';
+    return;
+  }
+
+  tableContainer.innerHTML = standings.map(team => `
+      <tr class="${team.name === '日本' ? 'highlight-row' : ''}">
+        <td class="font-bold">${team.rank}</td>
+        <td style="text-align: left;"><span class="flag">${escapeHTML(team.flag)}</span>${escapeHTML(team.name)}</td>
+        <td class="font-bold">${escapeHTML(team.points)}</td>
+        <td>${escapeHTML(team.matches)}</td>
+        <td>${escapeHTML(team.won)}</td>
+        <td>${escapeHTML(team.drawn)}</td>
+        <td>${escapeHTML(team.lost)}</td>
+        <td>${escapeHTML(team.gd)}</td>
+      </tr>
+    `).join('');
+  const groupDescription = document.getElementById('japanGroupDescription');
+  if (groupDescription) {
+    groupDescription.textContent = `グループF：${standings.map(team => team.name).join('、')}`;
+  }
+}
+
+function updateCountdown(match) {
+  const label = document.getElementById('countdownLabel');
+  const timer = document.getElementById('countdownTimer');
+  if (!label || !timer || !match) return;
+
+  if (match.state === 'in') {
+    label.textContent = '現在の試合状況';
+    timer.textContent = `LIVE ${match.displayClock || match.statusDetail}`.trim();
+    return;
+  }
+  if (match.state === 'post' || match.completed) {
+    label.textContent = '直近の試合結果';
+    timer.textContent = `${match.teams[0].score} - ${match.teams[1].score}`;
+    return;
+  }
+
+  const diffMs = match.timestamp - Date.now();
+  label.textContent = 'キックオフまで';
+  if (diffMs <= 0) {
+    timer.textContent = 'まもなく開始';
+    return;
+  }
+  const diffDays = Math.floor(diffMs / 86400000);
+  const diffHours = Math.floor((diffMs % 86400000) / 3600000);
+  const diffMins = Math.floor((diffMs % 3600000) / 60000);
+  timer.textContent = diffDays > 0
+    ? `${diffDays}日 ${diffHours}時間 ${diffMins}分`
+    : `${diffHours}時間 ${diffMins}分`;
+}
+
+function renderFeaturedMatch(match) {
+  const matchup = document.getElementById('featuredMatchup');
+  if (!match || !match.teams || match.teams.length !== 2) {
+    if (matchup) matchup.hidden = true;
+    return;
+  }
+
+  const [teamA, teamB] = match.teams;
+  document.getElementById('featuredMatchBadge').textContent = match.state === 'in'
+    ? 'KNOCKOUT STAGE UNDERWAY • LIVE'
+    : match.state === 'pre' ? 'KNOCKOUT STAGE UNDERWAY • NEXT MATCH' : 'KNOCKOUT STAGE UNDERWAY • LATEST RESULT';
+  document.getElementById('featuredMatchTitle').textContent = match.stageName;
+  document.getElementById('featuredMatchMeta').textContent = [formatMatchDate(match.date), match.venue, match.city]
+    .filter(Boolean).join(' • ');
+  document.getElementById('featuredFlagA').textContent = teamA.flag;
+  document.getElementById('featuredTeamA').textContent = teamA.name;
+  document.getElementById('featuredFlagB').textContent = teamB.flag;
+  document.getElementById('featuredTeamB').textContent = teamB.name;
+  document.getElementById('featuredScore').textContent = match.state === 'pre'
+    ? 'VS'
+    : `${teamA.score} - ${teamB.score}`;
+  matchup.hidden = false;
+
+  if (countdownInterval) clearInterval(countdownInterval);
+  updateCountdown(match);
+  countdownInterval = setInterval(() => updateCountdown(match), match.state === 'in' ? 15000 : 60000);
+}
+
+function goalSummary(match) {
+  const teamNames = Object.fromEntries(match.teams.map(team => [team.id, team.name]));
+  const goals = (match.details || []).filter(detail => detail.scoringPlay);
+  if (!goals.length) return '';
+  return goals.map(goal => {
+    const scorer = goal.athletesInvolved?.[0]?.displayName || '得点者不明';
+    const minute = goal.clock?.displayValue || '';
+    const team = teamNames[goal.team?.id] || '';
+    return `${team}：${scorer}${minute ? ` (${minute})` : ''}`;
+  }).join(' / ');
+}
+
+function renderJapanMatches() {
+  const container = document.getElementById('japanMatchList');
+  if (!container) return;
+  const matches = window.WorldCupLiveData?.matchesForTeam(liveMatches, 'JPN') || [];
+  if (!matches.length) {
+    container.innerHTML = '<div class="match-card empty-state-card">日本代表の最新試合を取得中...</div>';
+    return;
+  }
+
+  const featured = window.WorldCupLiveData.selectFeaturedMatch(matches);
+  container.innerHTML = matches.map(match => {
+    const goals = goalSummary(match);
+    const classes = [
+      'match-card',
+      match.state === 'post' ? 'completed' : 'upcoming',
+      match.state === 'in' ? 'live-match' : '',
+      featured?.id === match.id ? 'highlight' : ''
+    ].filter(Boolean).join(' ');
+    return `
+      <div class="${classes}">
+        <div class="match-meta">${escapeHTML(match.stageName)} - 日本時間 ${escapeHTML(formatMatchDate(match.date))} | ${escapeHTML(formatMatchStatus(match))}</div>
+        <div class="match-teams">
+          ${match.teams.map(team => `
+            <div class="team-row">
+              <span class="flag">${escapeHTML(team.flag)}</span>
+              <span class="team-name ${team.abbreviation === 'JPN' ? 'font-bold' : ''}">${escapeHTML(team.name)}</span>
+              <span class="score ${team.winner ? 'font-bold' : ''}">${match.state === 'pre' ? '-' : escapeHTML(team.score)}</span>
+            </div>
+          `).join('')}
+        </div>
+        ${goals ? `<div class="match-detail-summary"><p>【得点】${escapeHTML(goals)}</p></div>` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 function renderDashboard() {
-  // Countdown Timer
-  const matchDate = new Date('2026-06-30T02:00:00');
-  
-  function updateCountdown() {
-    const now = new Date();
-    const diffMs = matchDate - now;
-    const timerEl = document.getElementById('countdownTimer');
-    
-    if (!timerEl) return;
+  renderNewsList();
+  renderGroupStandings();
+  renderJapanMatches();
+  const featured = window.WorldCupLiveData?.selectFeaturedMatch(liveMatches);
+  if (featured) renderFeaturedMatch(featured);
+}
 
-    if (diffMs <= 0) {
-      timerEl.textContent = "試合開始！";
-      return;
-    }
-
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    
-    timerEl.textContent = `${diffDays}日 ${diffHours}時間 ${diffMins}分`;
+function saveLiveDataCache(fetchedAt) {
+  try {
+    localStorage.setItem(LIVE_DATA_CACHE_KEY, JSON.stringify({
+      matches: liveMatches,
+      standings: liveStandings,
+      news: liveNews,
+      fetchedAt
+    }));
+  } catch (error) {
+    console.warn('Latest data could not be cached:', error);
   }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 60000); // Update every minute
+}
 
-  // Render News
-  const newsListContainer = document.getElementById('homeNewsList');
-  if (newsListContainer) {
-    function renderNewsList(newsItems) {
-      newsListContainer.innerHTML = newsItems.map(news => {
-        const isLink = !!news.link;
-        const tagType = isLink ? 'a' : 'div';
-        const linkAttr = isLink ? `href="${news.link}" target="_blank" rel="noopener noreferrer"` : '';
-        return `
-          <${tagType} class="news-card" ${linkAttr}>
-            <span class="news-tag-dot ${news.tag}"></span>
-            <div class="news-content">
-              <div class="news-meta">
-                <span>${isLink ? 'REALTIME NEWS' : 'SAMURAI BLUE'}</span>
-                <span>${news.date}</span>
-              </div>
-              <div class="news-title">${news.title}</div>
-            </div>
-          </${tagType}>
-        `;
-      }).join('');
-    }
+function renderAllLiveSections() {
+  const featured = window.WorldCupLiveData?.selectFeaturedMatch(liveMatches);
+  if (featured) renderFeaturedMatch(featured);
+  renderGroupStandings();
+  renderJapanMatches();
+  renderNewsList();
+  renderPowersTab();
+  renderLiveTournament();
+  syncPredictorMatches(liveMatches);
+}
 
-    // First render simulated news
-    renderNewsList(SIMULATED_NEWS);
+async function refreshLiveData({ reason = 'manual' } = {}) {
+  if (refreshPromise) return refreshPromise;
+  setConnectionStatus('updating', '更新中');
 
-    // Then asynchronously fetch real news
-    fetchRealNews().then(realNews => {
-      if (realNews && realNews.length > 0) {
-        renderNewsList(realNews);
+  refreshPromise = (async () => {
+    try {
+      const [tournamentResult, newsResult] = await Promise.allSettled([
+        window.WorldCupLiveData.fetchTournamentData(),
+        fetchRealNews()
+      ]);
+
+      let receivedNetworkData = false;
+      let partial = false;
+      if (tournamentResult.status === 'fulfilled') {
+        if (Array.isArray(tournamentResult.value.matches)) {
+          liveMatches = tournamentResult.value.matches;
+          receivedNetworkData = true;
+        }
+        if (Array.isArray(tournamentResult.value.standings)) {
+          liveStandings = tournamentResult.value.standings;
+          receivedNetworkData = true;
+        }
+        partial = tournamentResult.value.partial;
+      } else {
+        partial = true;
+        console.warn('Tournament data refresh failed:', tournamentResult.reason);
       }
-    });
-  }
 
-  // Render Group F Table
-  const tableContainer = document.getElementById('homeGroupTable');
-  if (tableContainer) {
-    tableContainer.innerHTML = GROUP_F_STANDINGS.map(team => `
-      <tr class="${team.name === '日本' ? 'highlight-row' : ''}">
-        <td class="font-bold">${team.rank}</td>
-        <td style="text-align: left;"><span class="flag">${team.flag}</span>${team.name}</td>
-        <td class="font-bold">${team.points}</td>
-        <td>${team.matches}</td>
-        <td>${team.won}</td>
-        <td>${team.drawn}</td>
-        <td>${team.lost}</td>
-        <td>${team.gd}</td>
-      </tr>
-    `).join('');
-  }
+      if (newsResult.status === 'fulfilled' && Array.isArray(newsResult.value) && newsResult.value.length) {
+        liveNews = newsResult.value;
+        receivedNetworkData = true;
+      } else {
+        partial = true;
+      }
+
+      if (!receivedNetworkData) throw new Error('No live data source responded');
+
+      const fetchedAt = new Date().toISOString();
+      lastSuccessfulRefresh = Date.parse(fetchedAt);
+      saveLiveDataCache(fetchedAt);
+      renderAllLiveSections();
+      updateHeaderDate(new Date(fetchedAt));
+      setConnectionStatus('live', partial ? '一部最新' : 'LIVE');
+      return true;
+    } catch (error) {
+      console.warn('Live refresh failed; keeping the latest saved data:', error);
+      renderAllLiveSections();
+      const hasSavedData = liveMatches.length || liveStandings.length || liveNews.length;
+      setConnectionStatus('offline', hasSavedData ? '保存データ' : 'オフライン');
+      updateHeaderDate(lastSuccessfulRefresh ? new Date(lastSuccessfulRefresh) : null, hasSavedData ? '保存データ' : '更新');
+      if (reason === 'pull') showToast('通信できないため保存データを表示しています');
+      return false;
+    } finally {
+      refreshPromise = null;
+    }
+  })();
+
+  return refreshPromise;
+}
+
+function checkForAppUpdate() {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.ready.then(registration => registration.update()).catch(() => {});
+}
+
+function setupAutomaticRefresh() {
+  const refreshIfVisible = () => {
+    if (document.visibilityState !== 'visible') return;
+    checkForAppUpdate();
+    refreshLiveData({ reason: 'resume' });
+  };
+
+  document.addEventListener('visibilitychange', refreshIfVisible);
+  window.addEventListener('pageshow', event => {
+    if (event.persisted || Date.now() - lastSuccessfulRefresh > 30000) refreshIfVisible();
+  });
+  window.addEventListener('online', refreshIfVisible);
+  setInterval(() => {
+    if (document.visibilityState === 'visible') refreshLiveData({ reason: 'poll' });
+  }, 60000);
 }
 
 // --------------------------------------------------------------------------
@@ -750,27 +1173,84 @@ const ALL_TEAMS = [
   { id: "CRO", name: "クロアチア", flag: "🇭🇷", rating: 84 }
 ];
 
-const ACTUAL_MATCH_CARDS = [
-  // 決勝トーナメント ラウンド32 (オッズあり)
-  { id: "BRA_JPN", name: "ブラジル vs 日本 (日本時間 6月30日 02:00)", teamA: "BRA", teamB: "JPN", odds: true },
-  { id: "NED_CRO", name: "オランダ vs クロアチア (日本時間 6月29日 22:00)", teamA: "NED", teamB: "CRO", odds: true },
-  { id: "GER_SWE", name: "ドイツ vs スウェーデン (日本時間 6月29日 04:00)", teamA: "GER", teamB: "SWE", odds: true },
-  { id: "ESP_AUT", name: "スペイン vs オーストリア (日本時間 7月2日 02:00)", teamA: "ESP", teamB: "AUT", odds: true },
-  { id: "FRA_NOR", name: "フランス vs ノルウェー (日本時間 7月1日 05:00)", teamA: "FRA", teamB: "NOR", odds: true },
-  { id: "ARG_ENG", name: "アルゼンチン vs イングランド (想定・準々決勝)", teamA: "ARG", teamB: "ENG", odds: true },
+let ACTUAL_MATCH_CARDS = [];
 
-  // グループステージ結果 (オッズなし・対戦済)
-  { id: "JPN_SWE", name: "日本 vs スウェーデン (最終結果 1-1)", teamA: "JPN", teamB: "SWE", odds: false },
-  { id: "NED_TUN", name: "オランダ vs チュニジア (最終結果 3-1)", teamA: "NED", teamB: "TUN", odds: false },
-  { id: "ARG_AUT", name: "アルゼンチン vs オーストリア (最終結果 2-0)", teamA: "ARG", teamB: "AUT", odds: false },
-  { id: "FRA_NOR_GP", name: "フランス vs ノルウェー (最終結果 3-2)", teamA: "FRA", teamB: "NOR", odds: false },
-  { id: "BRA_SCO", name: "ブラジル vs スコットランド (最終結果 2-0)", teamA: "BRA", teamB: "SCO", odds: false },
-  { id: "ESP_URU", name: "スペイン vs ウルグアイ (最終結果 1-1)", teamA: "ESP", teamB: "URU", odds: false },
-  { id: "GER_ECU", name: "ドイツ vs エクアドル (最終結果 2-1)", teamA: "GER", teamB: "ECU", odds: false },
-  { id: "ENG_CRO", name: "イングランド vs クロアチア (最終結果 1-1)", teamA: "ENG", teamB: "CRO", odds: false },
-  { id: "JPN_NED", name: "日本 vs オランダ (最終結果 2-2)", teamA: "JPN", teamB: "NED", odds: false },
-  { id: "JPN_TUN", name: "日本 vs チュニジア (最終結果 4-0)", teamA: "JPN", teamB: "TUN", odds: false }
-];
+function ensurePredictorTeam(team) {
+  if (!team?.abbreviation || ALL_TEAMS.some(item => item.id === team.abbreviation)) return;
+  ALL_TEAMS.push({
+    id: team.abbreviation,
+    name: team.name,
+    flag: team.flag,
+    rating: 82
+  });
+}
+
+function populatePredictorMatches() {
+  const matchSelector = document.getElementById('oddsMatchSelector');
+  if (!matchSelector) return;
+  const previousValue = matchSelector.value;
+  const fragment = document.createDocumentFragment();
+  if (!ACTUAL_MATCH_CARDS.length) {
+    const loadingOption = document.createElement('option');
+    loadingOption.textContent = '最新の対戦カードを取得中...';
+    loadingOption.disabled = true;
+    loadingOption.selected = true;
+    fragment.appendChild(loadingOption);
+    const placeholders = {
+      flagSelectA: '⚽', flagSelectB: '⚽',
+      nameTeamA: '取得中', nameTeamB: '取得中',
+      ratingA: 'Rating: --', ratingB: 'Rating: --'
+    };
+    Object.entries(placeholders).forEach(([id, text]) => {
+      const element = document.getElementById(id);
+      if (element) element.textContent = text;
+    });
+  }
+  ACTUAL_MATCH_CARDS.forEach(match => {
+    const option = document.createElement('option');
+    option.value = match.id;
+    option.textContent = match.name;
+    fragment.appendChild(option);
+  });
+  matchSelector.replaceChildren(fragment);
+  if (ACTUAL_MATCH_CARDS.some(match => match.id === previousValue)) {
+    matchSelector.value = previousValue;
+  }
+}
+
+function syncPredictorMatches(matches) {
+  if (!Array.isArray(matches) || !matches.length) return;
+  const now = Date.now();
+  const usable = matches.filter(match => (
+    match.teams.length === 2 &&
+    match.teams.every(team => team.abbreviation && team.name !== '未定' && !/Winner|Loser|[123][A-L][WQ]/i.test(team.originalName || ''))
+  ));
+  const live = usable.filter(match => match.state === 'in');
+  const upcoming = usable.filter(match => match.state === 'pre' && match.timestamp >= now)
+    .sort((a, b) => a.timestamp - b.timestamp).slice(0, 16);
+  const completed = usable.filter(match => match.state === 'post')
+    .sort((a, b) => b.timestamp - a.timestamp).slice(0, 12);
+  const selected = [...live, ...upcoming, ...completed]
+    .filter((match, index, array) => array.findIndex(item => item.id === match.id) === index);
+  if (!selected.length) return;
+
+  selected.forEach(match => match.teams.forEach(ensurePredictorTeam));
+  ACTUAL_MATCH_CARDS = selected.map(match => {
+    const [teamA, teamB] = match.teams;
+    const result = match.state === 'post' ? `・最終結果 ${teamA.score}-${teamB.score}` : '';
+    const liveLabel = match.state === 'in' ? `・LIVE ${match.displayClock}` : '';
+    return {
+      id: `espn-${match.id}`,
+      name: `${teamA.name} vs ${teamB.name} (${formatMatchDate(match.date)}${liveLabel}${result})`,
+      teamA: teamA.abbreviation,
+      teamB: teamB.abbreviation,
+      odds: match.state === 'pre',
+      state: match.state
+    };
+  });
+  populatePredictorMatches();
+  calculateOddsAndPredictions();
+}
 
 function renderPredictorTab() {
   const matchSelector = document.getElementById('oddsMatchSelector');
@@ -780,10 +1260,9 @@ function renderPredictorTab() {
     return;
   }
 
-  // Populate match dropdown
-  matchSelector.innerHTML = ACTUAL_MATCH_CARDS.map(match => `
-    <option value="${match.id}">${match.name}</option>
-  `).join('');
+  // Populate match dropdown (use saved live data immediately when available)
+  if (liveMatches.length) syncPredictorMatches(liveMatches);
+  else populatePredictorMatches();
 
   // Selector change handler
   matchSelector.addEventListener('change', () => {
@@ -795,6 +1274,7 @@ function renderPredictorTab() {
 
   // Restore bracket predictions UI
   restoreBracketUI();
+  renderLiveTournament();
 }
 
 function calculateOddsAndPredictions() {
@@ -852,7 +1332,7 @@ function calculateOddsAndPredictions() {
 
     const commentaryText = document.getElementById('aiAnalysisText');
     if (commentaryText) {
-      commentaryText.innerHTML = `ℹ️ **この試合はすでに終了しているか、ブックメーカーのオッズ提供対象外です。**<br>順位表や対戦結果タブをご確認ください。`;
+      commentaryText.textContent = 'この試合は終了済みのため、試合前予測の対象外です。順位表や対戦結果タブをご確認ください。';
     }
     return;
   }
@@ -963,7 +1443,7 @@ function calculateOddsAndPredictions() {
       return `
         <li class="score-pred-item">
           <span class="rank">#${idx + 1}</span>
-          <span class="score-text">${teamA.name} ${item.scoreA} - ${item.scoreB} ${teamB.name}</span>
+          <span class="score-text">${escapeHTML(teamA.name)} ${item.scoreA} - ${item.scoreB} ${escapeHTML(teamB.name)}</span>
           <span class="percentage">${pct}%</span>
         </li>
       `;
@@ -982,17 +1462,17 @@ function calculateOddsAndPredictions() {
                        parseFloat(getOddsValue(probB, bookies.unibet.payout, 0))) / 3).toFixed(2);
 
     if (diff > 4) {
-      report = `海外の主要ブックメーカーは、${teamA.flag} **${teamA.name}の圧倒的優位**を予想しています。平均オッズは **${avgOddsA}倍** を推移しており、勝率評価は **${pctA}%** に達しています。AIによるスタッツ分析では、${teamA.name}の選手個々のクオリティと現在の戦術的成熟度が、${teamB.name}を大きく上回っていると判断されました。特に守備の安定感が際立っており、無失点勝利を予想する海外投資家が多い傾向にあります。`;
+      report = `レーティングモデルは、${teamA.flag} ${teamA.name}の優位を予測しています。参考オッズは${avgOddsA}倍、勝率評価は${pctA}%です。チーム評価の差から、${teamA.name}が試合を優位に進める可能性が高いと算出されました。`;
     } else if (diff >= 1) {
-      report = `ブックメーカー各社のオッズは、${teamA.flag} **${teamA.name}が僅かに優勢**（勝率約 **${pctA}%**、平均オッズ **${avgOddsA}倍**）であることを示しています。実力は拮抗していますが、${teamA.name}の攻撃アジリティとボール保持力が有利に働いています。一方、${teamB.flag} **${teamB.name}（勝率${pctB}%）**の走力とカウンターによる決定力も軽視されておらず、引き分け（オッズ約3倍台）も十分に狙える、接戦必至のカードと評価されています。`;
+      report = `レーティングモデルでは、${teamA.flag} ${teamA.name}がわずかに優勢です（勝率${pctA}%、参考オッズ${avgOddsA}倍）。${teamB.flag} ${teamB.name}の勝率も${pctB}%あり、引き分けを含めて接戦になる可能性が高いカードです。`;
     } else if (diff === 0) {
-      report = `オッズの観点から、**完全な互角（フィフティ・フィフティ）**と評価されています。両チームの勝率評価はほぼ同等（約 **${pctA}%**）であり、オッズも完全に割れています。両チームの戦術的志向は好対照（ポゼッションの${teamA.name}対、組織力・フィジカルの${teamB.name}）であり、中盤でのセカンドボールの回収率が試合の命運を分けることになりそうです。ブックメーカーの取引量も均等で、世界中のベッターの予想が最も割れている一戦です。`;
+      report = `レーティング上は完全な互角です。両チームの勝率評価はほぼ同等（約${pctA}%）で、引き分けを含むどの結果も十分に考えられます。`;
     } else if (diff >= -4) {
-      report = `海外ブックメーカーでは、${teamB.flag} **${teamB.name}が僅かに優勢**（勝率約 **${pctB}%**、平均オッズ **${avgOddsB}倍**）であると支持を集めています。${teamB.name}のフィジカル的な優位性と高いラインコントロールがオッズに反映されています。しかし、${teamA.flag} **${teamA.name}（勝率${pctA}%、オッズ${avgOddsA}倍）**の機動力とアジリティを用いた崩しは非常に脅威であり、海外のAIデータ分析ではドローまたは1点差での勝負となる可能性が最も高いと指摘されています。`;
+      report = `レーティングモデルでは、${teamB.flag} ${teamB.name}がわずかに優勢です（勝率${pctB}%、参考オッズ${avgOddsB}倍）。一方、${teamA.flag} ${teamA.name}の勝率も${pctA}%あり、ドローまたは1点差の接戦が有力です。`;
     } else {
-      report = `海外ブックメーカーは、${teamB.flag} **${teamB.name}の絶対的な優位**をオッズに表しています。平均オッズは **${avgOddsB}倍** となっており、これは勝率評価 **${pctB}%** に相当します。${teamB.name}のインテンシティとトランジションの速度は世界屈指であり、${teamA.name}が守備ブロックでどこまで耐えられるかがポイントになります。スコア予想でも${teamB.name}の複数得点による勝利が本命視されています。`;
+      report = `レーティングモデルは、${teamB.flag} ${teamB.name}の優位を予測しています。参考オッズは${avgOddsB}倍、勝率評価は${pctB}%です。チーム評価の差から、${teamB.name}が試合を優位に進める可能性が高いと算出されました。`;
     }
-    commentaryText.innerHTML = report;
+    commentaryText.textContent = report;
   }
 }
 
@@ -1160,16 +1640,37 @@ function restoreBracketUI() {
 // 8. Powerhouse nations (Tab 5) Rendering
 // --------------------------------------------------------------------------
 
+function getNationTournamentStatus(nation) {
+  const matches = window.WorldCupLiveData?.matchesForTeam(liveMatches, nation.id) || [];
+  if (!matches.length) return nation.group;
+  const live = matches.find(match => match.state === 'in');
+  if (live) {
+    const opponent = live.teams.find(team => team.abbreviation !== nation.id);
+    return `${live.stageName} 試合中（vs ${opponent?.name || '未定'}）`;
+  }
+  const upcoming = matches.filter(match => match.state === 'pre' && match.timestamp >= Date.now())
+    .sort((a, b) => a.timestamp - b.timestamp)[0];
+  if (upcoming) {
+    const opponent = upcoming.teams.find(team => team.abbreviation !== nation.id);
+    return `次戦 ${upcoming.stageName}（vs ${opponent?.name || '未定'}・${formatMatchDate(upcoming.date)}）`;
+  }
+  const latest = matches.filter(match => match.state === 'post')
+    .sort((a, b) => b.timestamp - a.timestamp)[0];
+  if (!latest || latest.stage === 'group-stage') return nation.group;
+  const team = latest.teams.find(item => item.abbreviation === nation.id);
+  return `${latest.stageName}${team?.winner || team?.advanced ? '突破' : '敗退'}`;
+}
+
 function renderPowersTab() {
   const container = document.getElementById('powersList');
   if (!container) return;
 
   container.innerHTML = POWERHOUSE_NATIONS.map(nation => `
     <div class="power-card">
-      <span class="power-team-flag">${nation.flag}</span>
+      <span class="power-team-flag">${escapeHTML(nation.flag)}</span>
       <div class="power-info">
         <div class="power-header">
-          <span class="power-name">${nation.name}</span>
+          <span class="power-name">${escapeHTML(nation.name)}</span>
           <div class="power-rating-star">
             <svg class="star-icon" viewBox="0 0 24 24">
               <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
@@ -1178,10 +1679,10 @@ function renderPowersTab() {
           </div>
         </div>
         <div class="power-stats">
-          <div><span style="font-weight: 700; color: var(--text-primary);">キープレイヤー:</span> <span class="power-key-player">${nation.keyPlayer}</span></div>
-          <div><span style="font-weight: 700; color: var(--text-primary);">現在の状況:</span> ${nation.group}</div>
+          <div><span style="font-weight: 700; color: var(--text-primary);">キープレイヤー:</span> <span class="power-key-player">${escapeHTML(nation.keyPlayer)}</span></div>
+          <div><span style="font-weight: 700; color: var(--text-primary);">現在の状況:</span> ${escapeHTML(getNationTournamentStatus(nation))}</div>
           <div><span style="font-weight: 700; color: var(--text-primary);">W杯優勝回数:</span> ${nation.titles > 0 ? `${nation.titles}回` : 'なし'}</div>
-          <p class="mt-1" style="font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35;">${nation.desc}</p>
+          <p class="mt-1" style="font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35;">${escapeHTML(nation.desc)}</p>
         </div>
       </div>
     </div>
@@ -1287,7 +1788,7 @@ function setupPullToRefresh() {
     }
   }, { passive: false });
 
-  document.addEventListener('touchend', () => {
+  document.addEventListener('touchend', async () => {
     if (!isPulling) return;
     isPulling = false;
     
@@ -1305,24 +1806,23 @@ function setupPullToRefresh() {
       ptrText.style.color = "var(--color-success)";
       ptr.style.height = '60px';
       
-      // リロード後にトーストを表示するためのフラグを設定
-      sessionStorage.setItem('wc2026_show_refresh_toast', 'true');
-      sessionStorage.setItem('wc2026_saved_tab', currentTab);
-
-      // サービスワーカーのアップデートを強制確認してから、画面をクリーンリロードする
+      // 画面やタブを維持したまま、データとアプリ本体の更新を確認する
+      let appUpdatePromise = Promise.resolve();
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.ready.then(reg => {
-          reg.update().finally(() => {
-            setTimeout(() => {
-              window.location.reload();
-            }, 600);
-          });
-        });
-      } else {
-        setTimeout(() => {
-          window.location.reload();
-        }, 600);
+        appUpdatePromise = navigator.serviceWorker.ready
+          .then(registration => registration.update())
+          .catch(() => {});
       }
+      const refreshed = await refreshLiveData({ reason: 'pull' });
+      await appUpdatePromise;
+      if (refreshed) showToast('最新情報に更新しました');
+
+      ptr.style.height = '0';
+      ptr.style.marginBottom = '0';
+      ptr.classList.remove('active', 'refreshing');
+      ptrIconWrap.style.transform = 'rotate(0deg)';
+      ptrText.textContent = '引っ張って更新';
+      ptrText.style.color = 'var(--text-secondary)';
     } else {
       // キャンセル
       ptr.style.height = '0';

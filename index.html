@@ -34,8 +34,8 @@
       <span class="logo-title">WC 2026</span>
     </div>
     <div class="header-status">
-      <span class="live-indicator"><span class="pulse-dot"></span>LIVE</span>
-      <span class="current-date" id="headerDate">2026.06.22 00:00 更新</span>
+      <span class="live-indicator" id="connectionStatus"><span class="pulse-dot"></span><span id="connectionStatusText">更新確認中</span></span>
+      <span class="current-date" id="headerDate">--.--.-- --:--</span>
     </div>
   </header>
 
@@ -57,11 +57,22 @@
       <div class="hero-card">
         <div class="hero-bg-accent"></div>
         <div class="hero-content">
-          <span class="badge">KNOCKOUT STAGE UNDERWAY</span>
-          <h1>熱狂の決勝トーナメント開幕！</h1>
-          <p>グループステージを突破し、いよいよ決勝トーナメントへ。SAMURAI BLUEの次なる激闘を応援しよう！</p>
+          <span class="badge" id="featuredMatchBadge">KNOCKOUT STAGE UNDERWAY</span>
+          <h1 id="featuredMatchTitle">直近の試合を取得中...</h1>
+          <p id="featuredMatchMeta">最新の日程と試合状況を確認しています</p>
+          <div class="featured-matchup" id="featuredMatchup" hidden>
+            <div class="featured-team">
+              <span class="featured-flag" id="featuredFlagA">⚽</span>
+              <span class="featured-team-name" id="featuredTeamA">未定</span>
+            </div>
+            <div class="featured-score" id="featuredScore">VS</div>
+            <div class="featured-team featured-team-away">
+              <span class="featured-flag" id="featuredFlagB">⚽</span>
+              <span class="featured-team-name" id="featuredTeamB">未定</span>
+            </div>
+          </div>
           <div class="countdown-container">
-            <div class="countdown-label">決勝T ラウンド32（ブラジル戦）まで</div>
+            <div class="countdown-label" id="countdownLabel">キックオフまで</div>
             <div class="countdown-timer" id="countdownTimer">--日 --時間 --分</div>
           </div>
         </div>
@@ -75,7 +86,7 @@
       </div>
 
       <div class="section-title">
-        <h2>グループF 順位状況 (Live)</h2>
+        <h2 id="homeGroupTitle">グループF 順位状況 (Live)</h2>
       </div>
       <div class="group-mini-table">
         <table class="styled-table">
@@ -102,7 +113,7 @@
     <section id="tab-japan" class="tab-view">
       <div class="view-header">
         <h1>SAMURAI BLUE</h1>
-        <p>グループF：オランダ、日本、スウェーデン、チュニジア</p>
+        <p id="japanGroupDescription">グループF：最新情報を取得中...</p>
       </div>
 
       <div class="sub-tabs">
@@ -112,86 +123,8 @@
 
       <!-- サブタブ：試合結果 -->
       <div id="subtab-japan-results" class="subtab-view active">
-        <div class="match-card-list">
-          <!-- 試合1 -->
-          <div class="match-card completed">
-            <div class="match-meta">第1節 - 日本時間 6月19日 (金) 04:00 | 試合終了</div>
-            <div class="match-teams">
-              <div class="team-row">
-                <span class="flag">🇳🇱</span>
-                <span class="team-name">オランダ</span>
-                <span class="score">2</span>
-              </div>
-              <div class="team-row">
-                <span class="flag">🇯🇵</span>
-                <span class="team-name">日本</span>
-                <span class="score">2</span>
-              </div>
-            </div>
-            <div class="match-detail-summary">
-              <p>【得点者】日：堂安 (35分), 鎌田 (78分) / オ：ガクポ (12分), デパイ (88分 PK)</p>
-              <p class="summary-text">強豪オランダ相手に先制されるも逆転。終了間際のPKで引き分けに終わるが、貴重な勝点1を獲得！</p>
-            </div>
-          </div>
-          <!-- 試合2 -->
-          <div class="match-card completed">
-            <div class="match-meta">第2節 - 日本時間 6月22日 (月) 04:00 | 試合終了</div>
-            <div class="match-teams">
-              <div class="team-row">
-                <span class="flag">🇯🇵</span>
-                <span class="team-name font-bold">日本</span>
-                <span class="score font-bold">4</span>
-              </div>
-              <div class="team-row">
-                <span class="flag">🇹🇳</span>
-                <span class="team-name">チュニジア</span>
-                <span class="score">0</span>
-              </div>
-            </div>
-            <div class="match-detail-summary">
-              <p>【得点者】日：上田 (8分, 42分), 久保 (61分), 中村 (85分)</p>
-              <p class="summary-text">上田の2得点を含む怒涛のゴールラッシュ。終始試合を支配し、無失点でワールドカップ初勝利！</p>
-            </div>
-          </div>
-          <!-- 試合3 -->
-          <div class="match-card completed highlight">
-            <div class="match-meta">第3節 - 日本時間 6月26日 (金) 00:00 | 試合終了</div>
-            <div class="match-teams">
-              <div class="team-row">
-                <span class="flag">🇯🇵</span>
-                <span class="team-name">日本</span>
-                <span class="score">1</span>
-              </div>
-              <div class="team-row">
-                <span class="flag">🇸🇪</span>
-                <span class="team-name">スウェーデン</span>
-                <span class="score">1</span>
-              </div>
-            </div>
-            <div class="match-detail-summary">
-              <p>【得点者】日：板倉 (55分) / ス：フォルスベリ (72分)</p>
-              <p class="summary-text">板倉のヘディングシュートで先制するも、後半スウェーデンの猛攻に遭いドロー。グループ2位での決勝T進出が確定！</p>
-            </div>
-          </div>
-          <!-- 試合4 (決勝Tラウンド32) -->
-          <div class="match-card upcoming">
-            <div class="match-meta">決勝T ラウンド32 - 日本時間 6月30日 (火) 02:00 | 対戦確定</div>
-            <div class="match-teams">
-              <div class="team-row">
-                <span class="flag">🇧🇷</span>
-                <span class="team-name">ブラジル</span>
-                <span class="score">-</span>
-              </div>
-              <div class="team-row">
-                <span class="flag">🇯🇵</span>
-                <span class="team-name font-bold">日本</span>
-                <span class="score">-</span>
-              </div>
-            </div>
-            <div class="match-action-area">
-              <button class="btn btn-primary btn-sm predict-btn-shortcut" onclick="goToPredictorTab()">オッズ・AI予想を見る</button>
-            </div>
-          </div>
+        <div class="match-card-list" id="japanMatchList">
+          <div class="match-card loading-card">最新の試合結果・日程を取得中...</div>
         </div>
       </div>
 
@@ -287,21 +220,54 @@
     <!-- ==================== PREDICTOR TAB ==================== -->
     <section id="tab-predictor" class="tab-view">
       <div class="view-header">
-        <h1>海外オッズ予想 &amp; シミュレーター</h1>
-        <p>海外ブックメーカーオッズのリアルタイム予測と決勝トーナメント勝敗予想</p>
+        <h1>決勝トーナメント</h1>
+        <p>最新の組み合わせ・試合日程・結果と予想シミュレーター</p>
       </div>
 
       <div class="sub-tabs">
-        <button class="sub-tab-btn active" data-subtab="predictor-game">海外オッズ・AI予想</button>
-        <button class="sub-tab-btn" data-subtab="predictor-bracket">決勝トーナメント予想</button>
+        <button class="sub-tab-btn active" data-subtab="predictor-tournament">大会</button>
+        <button class="sub-tab-btn" data-subtab="predictor-game">対戦予測</button>
+        <button class="sub-tab-btn" data-subtab="predictor-bracket">優勝予想</button>
+      </div>
+
+      <!-- サブタブ：実際の決勝トーナメント -->
+      <div id="subtab-predictor-tournament" class="subtab-view active">
+        <div class="tournament-live-header">
+          <div>
+            <span class="live-data-badge"><span class="pulse-dot"></span> LIVE DATA</span>
+            <h3>決勝トーナメント表</h3>
+            <p>各ラウンドの組み合わせと勝ち上がりを表示します。表は横・縦にスクロールできます。</p>
+          </div>
+          <span class="tournament-updated-at" id="tournamentUpdatedAt">最新情報を取得中</span>
+        </div>
+
+        <div class="tournament-legend" aria-label="試合状態の凡例">
+          <span><i class="legend-dot live"></i>試合中</span>
+          <span><i class="legend-dot completed"></i>試合終了</span>
+          <span><i class="legend-dot upcoming"></i>予定</span>
+        </div>
+
+        <div class="live-tournament-scroll">
+          <div class="live-tournament-bracket" id="liveTournamentBracket" aria-live="polite">
+            <div class="tournament-loading">最新のトーナメント表を取得中...</div>
+          </div>
+        </div>
+
+        <div class="tournament-schedule-heading">
+          <h3>試合日程・結果一覧</h3>
+          <p>ラウンド別に日本時間で表示</p>
+        </div>
+        <div class="knockout-schedule-list" id="knockoutScheduleList" aria-live="polite">
+          <div class="match-card loading-card">最新の日程・結果を取得中...</div>
+        </div>
       </div>
 
       <!-- サブタブ：海外オッズ予想 -->
-      <div id="subtab-predictor-game" class="subtab-view active">
+      <div id="subtab-predictor-game" class="subtab-view">
         
         <div class="odds-predictor-card">
           <h3>対戦カード＆オッズ分析</h3>
-          <p class="card-desc">対戦チームを選択すると、海外の主要ブックメーカーの最新オッズとAI勝敗確率をリアルタイム計算します。</p>
+          <p class="card-desc">最新の対戦カードを選択すると、チームレーティングから参考オッズと勝敗確率を計算します。</p>
           
           <div class="match-select-container">
             <label for="oddsMatchSelector" class="select-label">対象の対戦カードを選択:</label>
@@ -329,12 +295,12 @@
 
         <!-- オッズ表示セクション -->
         <div class="odds-display-card">
-          <h4>🏆 海外ブックメーカー オッズ比較</h4>
+          <h4>🏆 レーティング換算 参考オッズ</h4>
           <div class="odds-table-container">
             <table class="odds-table">
               <thead>
                 <tr>
-                  <th>ブックメーカー</th>
+                  <th>計算モデル</th>
                   <th id="labelWinA">チームA 勝</th>
                   <th>引き分け</th>
                   <th id="labelWinB">チームB 勝</th>
@@ -342,19 +308,19 @@
               </thead>
               <tbody>
                 <tr id="bookmaker-bet365">
-                  <td class="bookie-name"><span class="bookie-logo green">bet365</span></td>
+                  <td class="bookie-name"><span class="bookie-logo green">標準</span></td>
                   <td class="odds-val" id="oddsA-bet365">-</td>
                   <td class="odds-val" id="oddsD-bet365">-</td>
                   <td class="odds-val" id="oddsB-bet365">-</td>
                 </tr>
                 <tr id="bookmaker-williamhill">
-                  <td class="bookie-name"><span class="bookie-logo blue">William Hill</span></td>
+                  <td class="bookie-name"><span class="bookie-logo blue">安定重視</span></td>
                   <td class="odds-val" id="oddsA-williamhill">-</td>
                   <td class="odds-val" id="oddsD-williamhill">-</td>
                   <td class="odds-val" id="oddsB-williamhill">-</td>
                 </tr>
                 <tr id="bookmaker-unibet">
-                  <td class="bookie-name"><span class="bookie-logo red">1xBet</span></td>
+                  <td class="bookie-name"><span class="bookie-logo red">攻撃重視</span></td>
                   <td class="odds-val" id="oddsA-unibet">-</td>
                   <td class="odds-val" id="oddsD-unibet">-</td>
                   <td class="odds-val" id="oddsB-unibet">-</td>
@@ -382,14 +348,14 @@
           </div>
 
           <div class="score-predictions-section">
-            <h5>🎯 最も確率の高いスコア予想 (海外AI)</h5>
+            <h5>🎯 最も確率の高いスコア予想</h5>
             <ol class="score-pred-list" id="scorePredList">
               <!-- JSで動的に追加されます -->
             </ol>
           </div>
 
           <div class="tactical-commentary-section">
-            <h5>📝 ブックメーカー・AI分析レポート</h5>
+            <h5>📝 レーティングモデル分析</h5>
             <p class="analysis-text" id="aiAnalysisText">
               ロード中...
             </p>
@@ -400,7 +366,7 @@
       <!-- サブタブ：決勝トーナメント予想 -->
       <div id="subtab-predictor-bracket" class="subtab-view">
         <div class="bracket-intro">
-          <p>決勝トーナメント（ラウンド32でのブラジル戦決定を踏まえた勝ち上がり）の勝ち抜けチームをタップして、あなたの優勝予想を作成しましょう！</p>
+          <p>自由に勝ち抜けチームを選ぶ予想シミュレーターです。実際の大会結果・組み合わせとは連動しません。</p>
         </div>
 
         <div class="bracket-wrapper">
@@ -568,7 +534,7 @@
       <svg class="nav-icon" viewBox="0 0 24 24">
         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
       </svg>
-      <span class="nav-label">予想</span>
+      <span class="nav-label">決勝T</span>
     </button>
     <button class="nav-item" data-tab="powers">
       <svg class="nav-icon" viewBox="0 0 24 24">
@@ -601,9 +567,10 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
           .then((reg) => {
             console.log('Service Worker registered successfully!', reg.scope);
+            reg.update().catch(() => {});
             
             // Check for updates
             reg.addEventListener('updatefound', () => {
@@ -630,6 +597,7 @@
   </script>
   
   <!-- Custom Logic JS -->
+  <script src="live-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
